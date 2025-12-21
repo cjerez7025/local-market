@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Local Market - Tu Marketplace de Barrio</title>
+    <meta name="description" content="Compra y vende productos de segunda mano en tu barrio. Como Facebook Marketplace, pero local.">
+    
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- AOS - Animate on Scroll -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top shadow-sm">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <span class="brand-text">Local<span class="brand-accent">Market</span></span>
+            </a>
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="index.html">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="catalogo.html">Catálogo</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#como-comprar">Cómo Comprar</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#faq">FAQ</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-overlay"></div>
+        <div class="container">
+            <div class="row align-items-center min-vh-75">
+                <div class="col-lg-7" data-aos="fade-right" data-aos-duration="1000">
+                    <div class="badge-custom mb-3">
+                        <i class="bi bi-shop"></i> Marketplace Local
+                    </div>
+                    <h1 class="hero-title">Tu Barrio, Tu Marketplace</h1>
+                    <p class="hero-subtitle">Compra y vende productos de segunda mano con tus vecinos. Muebles, electrónica, decoración y más.</p>
+                    <div class="hero-cta">
+                        <a href="catalogo.html" class="btn btn-primary btn-lg me-3">
+                            Explorar Productos
+                        </a>
+                        <a href="#como-comprar" class="btn btn-outline-dark btn-lg">
+                            Cómo Funciona
+                        </a>
+                    </div>
+                    <div class="hero-stats mt-4">
+                        <div class="stat-item">
+                            <strong>50+</strong>
+                            <span>Productos</span>
+                        </div>
+                        <div class="stat-item">
+                            <strong>100%</strong>
+                            <span>Local</span>
+                        </div>
+                        <div class="stat-item">
+                            <strong>0%</strong>
+                            <span>Comisión</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-5 d-none d-lg-block" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="200">
+                    <div class="hero-image-wrapper">
+                        <img src="https://placehold.co/1200x800/5B7B5A/FFFFFF?text=Local+Market" alt="Local Market" class="hero-image">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categorías Destacadas -->
+    <section class="categories-section py-5">
+        <div class="container">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <h2 class="section-title">Explora por Categoría</h2>
+                <p class="section-subtitle">Encuentra exactamente lo que necesitas</p>
+            </div>
+            
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="100">
+                    <a href="catalogo.html?categoria=muebles" class="category-card">
+                        <div class="category-icon">
+                            <i class="bi bi-house-door"></i>
+                        </div>
+                        <h3>Muebles</h3>
+                        <p>Sofás, mesas, sillas</p>
+                        <span class="category-arrow"><i class="bi bi-arrow-right"></i></span>
+                    </a>
+                </div>
+                <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="200">
+                    <a href="catalogo.html?categoria=electronica" class="category-card">
+                        <div class="category-icon">
+                            <i class="bi bi-laptop"></i>
+                        </div>
+                        <h3>Electrónica</h3>
+                        <p>Tecnología y gadgets</p>
+                        <span class="category-arrow"><i class="bi bi-arrow-right"></i></span>
+                    </a>
+                </div>
+                <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="300">
+                    <a href="catalogo.html?categoria=decoracion" class="category-card">
+                        <div class="category-icon">
+                            <i class="bi bi-palette"></i>
+                        </div>
+                        <h3>Decoración</h3>
+                        <p>Adornos y arte</p>
+                        <span class="category-arrow"><i class="bi bi-arrow-right"></i></span>
+                    </a>
+                </div>
+                <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="400">
+                    <a href="catalogo.html?categoria=cocina" class="category-card">
+                        <div class="category-icon">
+                            <i class="bi bi-cup-hot"></i>
+                        </div>
+                        <h3>Cocina</h3>
+                        <p>Utensilios y más</p>
+                        <span class="category-arrow"><i class="bi bi-arrow-right"></i></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Artículos Destacados -->
+    <section class="featured-section py-5 bg-light-subtle">
+        <div class="container">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <h2 class="section-title">Artículos Destacados</h2>
+                <p class="section-subtitle">Las mejores oportunidades del momento</p>
+            </div>
+            
+            <div id="featuredProducts" class="row g-4">
+                <!-- Los productos se cargarán dinámicamente con JavaScript -->
+            </div>
+
+            <div class="text-center mt-5" data-aos="fade-up">
+                <a href="catalogo.html" class="btn btn-outline-primary btn-lg">
+                    Ver Todos los Artículos
+                    <i class="bi bi-arrow-right ms-2"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cómo Comprar -->
+    <section id="como-comprar" class="how-to-buy-section py-5">
+        <div class="container">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <h2 class="section-title">Cómo Comprar</h2>
+                <p class="section-subtitle">Simple, rápido y seguro</p>
+            </div>
+            
+            <div class="row g-4">
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="step-card">
+                        <div class="step-number">1</div>
+                        <h3>Explora el Catálogo</h3>
+                        <p>Navega por todos nuestros artículos. Usa filtros para encontrar exactamente lo que buscas.</p>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="step-card">
+                        <div class="step-number">2</div>
+                        <h3>Contacta por WhatsApp</h3>
+                        <p>Haz clic en "Contactar" y envíanos un mensaje. Te responderemos de inmediato.</p>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
+                    <div class="step-card">
+                        <div class="step-number">3</div>
+                        <h3>Coordina y Retira</h3>
+                        <p>Acordamos detalles de pago y retiro. ¡Así de simple!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA WhatsApp -->
+    <section class="cta-section py-5">
+        <div class="container">
+            <div class="cta-card" data-aos="zoom-in">
+                <div class="row align-items-center">
+                    <div class="col-lg-8">
+                        <h2 class="cta-title">¿Tienes Dudas?</h2>
+                        <p class="cta-text">Contáctanos directo por WhatsApp y te ayudaremos con lo que necesites</p>
+                    </div>
+                    <div class="col-lg-4 text-lg-end mt-3 mt-lg-0">
+                        <a href="https://wa.me/56942229660?text=Hola,%20tengo%20una%20consulta%20sobre%20la%20liquidación" 
+                           class="btn btn-whatsapp btn-lg" target="_blank">
+                            <i class="bi bi-whatsapp me-2"></i>
+                            Chatea con Nosotros
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="faq-section py-5 bg-light-subtle">
+        <div class="container">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <h2 class="section-title">Preguntas Frecuentes</h2>
+                <p class="section-subtitle">Todo lo que necesitas saber</p>
+            </div>
+            
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="accordion" id="faqAccordion">
+                        <div class="accordion-item" data-aos="fade-up" data-aos-delay="100">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                                    ¿Cómo puedo reservar un artículo?
+                                </button>
+                            </h2>
+                            <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    No hacemos reservas sin abono. Para asegurar un artículo, debes hacer una transferencia del 30% del valor total. Te enviamos los datos bancarios por WhatsApp.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion-item" data-aos="fade-up" data-aos-delay="200">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+                                    ¿Dónde se retiran los artículos?
+                                </button>
+                            </h2>
+                            <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    Retiro en Pirque, Región Metropolitana. Coordinamos el día y horario por WhatsApp. También podemos organizar envío (costo aparte según zona).
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion-item" data-aos="fade-up" data-aos-delay="300">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+                                    ¿Qué medios de pago aceptan?
+                                </button>
+                            </h2>
+                            <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    Aceptamos transferencia bancaria y efectivo al momento del retiro. Para artículos de alto valor, preferimos transferencia.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion-item" data-aos="fade-up" data-aos-delay="400">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4">
+                                    ¿Los artículos tienen garantía?
+                                </button>
+                            </h2>
+                            <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    Todos los artículos se venden "tal cual se muestran". Puedes revisarlos presencialmente antes de comprar. No hacemos devoluciones, pero garantizamos que las fotos y descripciones son 100% reales.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item" data-aos="fade-up" data-aos-delay="500">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq5">
+                                    ¿Hacen descuentos por compra múltiple?
+                                </button>
+                            </h2>
+                            <div id="faq5" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    Sí, si compras 3 o más artículos, podemos hacer un descuento adicional. Contáctanos por WhatsApp para coordinar.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <h3 class="footer-title">Local<span class="brand-accent">Market</span></h3>
+                    <p class="footer-text">Tu marketplace de barrio. Compra y vende productos de segunda mano localmente.</p>
+                    <!-- Redes sociales deshabilitadas - Descomentar cuando estén disponibles
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="bi bi-facebook"></i></a>
+                        <a href="#" class="social-link"><i class="bi bi-instagram"></i></a>
+                        <a href="https://wa.me/56942229660" class="social-link"><i class="bi bi-whatsapp"></i></a>
+                    </div>
+                    -->
+                </div>
+                
+                <div class="col-md-4">
+                    <h4 class="footer-subtitle">Información</h4>
+                    <ul class="footer-links">
+                        <li><a href="catalogo.html">Catálogo Completo</a></li>
+                        <li><a href="#como-comprar">Cómo Comprar</a></li>
+                        <li><a href="#faq">Preguntas Frecuentes</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-md-4">
+                    <h4 class="footer-subtitle">Condiciones</h4>
+                    <ul class="footer-info">
+                        <li><i class="bi bi-geo-alt"></i> Retiro en Pirque, RM</li>
+                        <li><i class="bi bi-credit-card"></i> Transferencia o Efectivo</li>
+                        <li><i class="bi bi-shield-check"></i> Sin devoluciones</li>
+                        <li><i class="bi bi-clock"></i> Reservas con abono del 30%</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 Liquidación Total. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/56942229660?text=Hola,%20vengo%20del%20sitio%20web" 
+       class="whatsapp-float" 
+       target="_blank"
+       data-aos="fade-left"
+       data-aos-delay="1000">
+        <i class="bi bi-whatsapp"></i>
+    </a>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- AOS JS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    
+    <!-- Custom JS -->
+    <script src="app-dinamico.js"></script>
+    
+    <script>
+        // Initialize AOS
+        AOS.init({
+            once: true,
+            duration: 800,
+            easing: 'ease-out-cubic'
+        });
+
+        // Load featured products on home page
+        document.addEventListener('DOMContentLoaded', function() {
+            const featuredContainer = document.getElementById('featuredProducts');
+            if (featuredContainer) {
+                const featured = productos.filter(p => p.destacado && p.disponibilidad === 'disponible').slice(0, 3);
+                featuredContainer.innerHTML = featured.map(producto => createProductCard(producto)).join('');
+            }
+        });
+    </script>
+</body>
+</html>

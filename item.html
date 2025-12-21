@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalle del Producto - Liquidación Total</title>
+    <meta name="description" content="Información detallada del producto en liquidación">
+    
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- AOS - Animate on Scroll -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top shadow-sm">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <span class="brand-text">Local<span class="brand-accent">Market</span></span>
+            </a>
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="catalogo.html">Catálogo</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html#como-comprar">Cómo Comprar</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html#faq">FAQ</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Breadcrumb -->
+    <section class="bg-light-subtle py-3">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-0">
+                    <li class="breadcrumb-item"><a href="index.html">Inicio</a></li>
+                    <li class="breadcrumb-item"><a href="catalogo.html">Catálogo</a></li>
+                    <li class="breadcrumb-item active" id="breadcrumbProductName" aria-current="page">Producto</li>
+                </ol>
+            </nav>
+        </div>
+    </section>
+
+    <!-- Product Detail Section -->
+    <section class="product-detail-section py-5">
+        <div class="container">
+            <div class="row g-5">
+                
+                <!-- Product Gallery -->
+                <div class="col-lg-6" data-aos="fade-right">
+                    <div id="productGallery">
+                        <div id="mainCarousel" class="carousel slide mb-3">
+                            <div class="carousel-inner" id="mainCarouselInner">
+                                <!-- Images will be loaded here -->
+                            </div>
+                            <button class="carousel-control-prev" type="button" data-bs-target="#mainCarousel" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Anterior</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#mainCarousel" data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Siguiente</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product Info -->
+                <div class="col-lg-6" data-aos="fade-left">
+                    <div id="productBadges" class="mb-3"></div>
+                    
+                    <h1 id="productTitle" class="display-5 mb-3"></h1>
+                    
+                    <div class="mb-4">
+                        <span id="productPrice" class="display-4 text-success fw-bold"></span>
+                    </div>
+
+                    <div class="product-meta-detail mb-4">
+                        <div class="row g-3">
+                            <div class="col-6">
+                                <div class="meta-card">
+                                    <i class="bi bi-tag text-success"></i>
+                                    <div>
+                                        <small class="text-muted d-block">Categoría</small>
+                                        <strong id="productCategoria"></strong>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="meta-card">
+                                    <i class="bi bi-star text-success"></i>
+                                    <div>
+                                        <small class="text-muted d-block">Estado</small>
+                                        <strong id="productEstado"></strong>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="meta-card">
+                                    <i class="bi bi-geo-alt text-success"></i>
+                                    <div>
+                                        <small class="text-muted d-block">Ubicación</small>
+                                        <strong id="productUbicacion"></strong>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="meta-card">
+                                    <i class="bi bi-truck text-success"></i>
+                                    <div>
+                                        <small class="text-muted d-block">Entrega</small>
+                                        <strong id="productEntrega"></strong>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="description-section mb-4">
+                        <h3 class="h5 mb-3">Descripción</h3>
+                        <p id="productDescription" class="text-muted"></p>
+                    </div>
+
+                    <div class="action-buttons">
+                        <a id="whatsappButton" href="#" class="btn btn-whatsapp btn-lg w-100 mb-3" target="_blank">
+                            <i class="bi bi-whatsapp me-2"></i>
+                            Contactar por WhatsApp
+                        </a>
+                        <a href="catalogo.html" class="btn btn-outline-secondary w-100">
+                            <i class="bi bi-arrow-left me-2"></i>
+                            Volver al Catálogo
+                        </a>
+                    </div>
+
+                    <!-- Warning for sold/reserved items -->
+                    <div id="warningMessage" class="alert alert-warning mt-4 d-none">
+                        <i class="bi bi-exclamation-triangle me-2"></i>
+                        <span id="warningText"></span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Related Products -->
+    <section class="related-products py-5 bg-light-subtle">
+        <div class="container">
+            <h2 class="section-title text-center mb-5" data-aos="fade-up">También te puede interesar</h2>
+            <div id="relatedProducts" class="row g-4">
+                <!-- Related products will be loaded here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <h3 class="footer-title">Local<span class="brand-accent">Market</span></h3>
+                    <p class="footer-text">Tu marketplace de barrio. Compra y vende productos de segunda mano localmente.</p>
+                    <!-- Redes sociales deshabilitadas - Descomentar cuando estén disponibles
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="bi bi-facebook"></i></a>
+                        <a href="#" class="social-link"><i class="bi bi-instagram"></i></a>
+                        <a href="https://wa.me/56942229660" class="social-link"><i class="bi bi-whatsapp"></i></a>
+                    </div>
+                    -->
+                </div>
+                
+                <div class="col-md-4">
+                    <h4 class="footer-subtitle">Información</h4>
+                    <ul class="footer-links">
+                        <li><a href="catalogo.html">Catálogo Completo</a></li>
+                        <li><a href="index.html#como-comprar">Cómo Comprar</a></li>
+                        <li><a href="index.html#faq">Preguntas Frecuentes</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-md-4">
+                    <h4 class="footer-subtitle">Condiciones</h4>
+                    <ul class="footer-info">
+                        <li><i class="bi bi-geo-alt"></i> Retiro en Pirque, RM</li>
+                        <li><i class="bi bi-credit-card"></i> Transferencia o Efectivo</li>
+                        <li><i class="bi bi-shield-check"></i> Sin devoluciones</li>
+                        <li><i class="bi bi-clock"></i> Reservas con abono del 30%</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="row align-items-center">
+                    <div class="col-md-6 text-center text-md-start mb-2 mb-md-0">
+                        <p class="mb-0">&copy; 2024 Local Market. Todos los derechos reservados.</p>
+                    </div>
+                    <div class="col-md-6 text-center text-md-end">
+                        <div class="developer-info">
+                            <p class="mb-1">
+                                <strong>¿Necesitas un sitio web?</strong>
+                            </p>
+                            <p class="mb-0">
+                                Desarrollado por <strong>Carlos Jerez B.</strong>
+                            </p>
+                            <p class="developer-contact mb-0">
+                                <a href="mailto:jerezcarlos70@gmail.com">
+                                    <i class="bi bi-envelope"></i> jerezcarlos70@gmail.com
+                                </a>
+                                <span class="mx-2">|</span>
+                                <a href="https://wa.me/56942229660?text=Hola,%20me%20interesa%20un%20sitio%20web" target="_blank">
+                                    <i class="bi bi-whatsapp"></i> +56 9 4222 9660
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- AOS JS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    
+    <!-- Custom JS -->
+    <script src="app-dinamico.js"></script>
+    
+    <script>
+        // Initialize AOS
+        AOS.init({
+            once: true,
+            duration: 800,
+            easing: 'ease-out-cubic'
+        });
+
+        // Load product detail
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get product ID from URL parameter
+            const urlParams = new URLSearchParams(window.location.search);
+            const productId = parseInt(urlParams.get('id'));
+            
+            if (!productId) {
+                // Redirect to catalog if no ID
+                window.location.href = 'catalogo.html';
+                return;
+            }
+            
+            const producto = productos.find(p => p.id === productId);
+            
+            if (!producto) {
+                // Redirect if product not found
+                window.location.href = 'catalogo.html';
+                return;
+            }
+            
+            // Update page title
+            document.title = `${producto.nombre} - Liquidación Total`;
+            
+            // Update breadcrumb
+            document.getElementById('breadcrumbProductName').textContent = producto.nombre;
+            
+            // Update product badges
+            document.getElementById('productBadges').innerHTML = getStatusBadgeHTML(producto);
+            
+            // Update product info
+            document.getElementById('productTitle').textContent = producto.nombre;
+            document.getElementById('productPrice').textContent = formatPrice(producto.precio);
+            document.getElementById('productCategoria').textContent = capitalize(producto.categoria);
+            document.getElementById('productEstado').textContent = capitalize(producto.estado);
+            document.getElementById('productUbicacion').textContent = producto.ubicacion;
+            document.getElementById('productEntrega').textContent = producto.entrega;
+            document.getElementById('productDescription').textContent = producto.descripcionLarga;
+            
+            // Update carousel
+            const carouselInner = document.getElementById('mainCarouselInner');
+            carouselInner.innerHTML = producto.imagenes.map((img, index) => `
+                <div class="carousel-item ${index === 0 ? 'active' : ''}">
+                    <img src="${img}" 
+                         class="d-block w-100" 
+                         alt="${producto.nombre}"
+                         style="border-radius: 16px; height: 500px; object-fit: cover;"
+                         onerror="this.src='assets/placeholder.jpg'">
+                </div>
+            `).join('');
+            
+            // Update WhatsApp button
+            const whatsappBtn = document.getElementById('whatsappButton');
+            whatsappBtn.href = generateWhatsAppMessage(producto);
+            
+            // Show warning for sold/reserved items
+            const warningMessage = document.getElementById('warningMessage');
+            const warningText = document.getElementById('warningText');
+            
+            if (producto.disponibilidad === 'vendido') {
+                whatsappBtn.classList.add('disabled');
+                whatsappBtn.innerHTML = '<i class="bi bi-x-circle me-2"></i>Producto Vendido';
+                warningMessage.classList.remove('d-none');
+                warningText.textContent = 'Este artículo ya ha sido vendido y no está disponible.';
+            } else if (producto.disponibilidad === 'reservado') {
+                warningMessage.classList.remove('d-none');
+                warningMessage.classList.remove('alert-warning');
+                warningMessage.classList.add('alert-info');
+                warningText.textContent = 'Este artículo está reservado. Puede quedar disponible si la reserva no se concreta.';
+            }
+            
+            // Load related products (same category, different product)
+            const relatedContainer = document.getElementById('relatedProducts');
+            const related = productos
+                .filter(p => p.categoria === producto.categoria && p.id !== producto.id && p.disponibilidad === 'disponible')
+                .slice(0, 3);
+            
+            if (related.length > 0) {
+                relatedContainer.innerHTML = related.map(p => createProductCard(p)).join('');
+            } else {
+                relatedContainer.parentElement.style.display = 'none';
+            }
+        });
+    </script>
+
+    <style>
+        .meta-card {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            background: var(--color-white);
+            border-radius: 12px;
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .meta-card i {
+            font-size: 1.5rem;
+        }
+        
+        .product-detail-section {
+            min-height: 60vh;
+        }
+        
+        .description-section {
+            padding: 1.5rem;
+            background: var(--color-background);
+            border-radius: 12px;
+        }
+        
+        .breadcrumb {
+            font-size: 0.9rem;
+        }
+        
+        .breadcrumb-item + .breadcrumb-item::before {
+            color: var(--color-text-light);
+        }
+        
+        .breadcrumb-item a {
+            color: var(--color-accent);
+            text-decoration: none;
+        }
+        
+        .breadcrumb-item a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</body>
+</html>
