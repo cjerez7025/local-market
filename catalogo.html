@@ -17,6 +17,237 @@
     
     <!-- Custom CSS -->
     <link rel="stylesheet" href="styles.css">
+    
+    <style>
+        /* ============================================
+           SISTEMA DE TEMAS POR CATEGORÍA
+           ============================================ */
+        
+        body {
+            transition: background-color 0.5s ease;
+        }
+        
+        .page-header {
+            transition: all 0.5s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* Animación de partículas de fondo */
+        .category-particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 0;
+            pointer-events: none;
+        }
+        
+        .particle {
+            position: absolute;
+            font-size: 2rem;
+            opacity: 0.3;
+            animation: float 15s infinite ease-in-out;
+        }
+        
+        @keyframes float {
+            0%, 100% { 
+                transform: translateY(0) rotate(0deg); 
+                opacity: 0.3;
+            }
+            50% { 
+                transform: translateY(-50px) rotate(180deg); 
+                opacity: 0.6;
+            }
+        }
+        
+        /* Badge de categoría activa */
+        .category-badge {
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1rem;
+            animation: slideDown 0.6s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px) scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+        
+        /* Animación del título */
+        .page-title {
+            animation: fadeInScale 0.8s ease;
+        }
+        
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        
+        /* Overlay con patrón */
+        .category-pattern {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.05;
+            background-size: 50px 50px;
+            z-index: 0;
+        }
+        
+        .pattern-muebles {
+            background-image: repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(255,255,255,.1) 10px, rgba(255,255,255,.1) 20px);
+        }
+        
+        .pattern-electronica {
+            background-image: 
+                linear-gradient(45deg, rgba(255,255,255,.1) 25%, transparent 25%),
+                linear-gradient(-45deg, rgba(255,255,255,.1) 25%, transparent 25%);
+        }
+        
+        .pattern-cocina {
+            background-image: radial-gradient(circle, rgba(255,255,255,.1) 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+        
+        /* ============================================
+           TEMAS POR CATEGORÍA
+           ============================================ */
+        
+        /* MUEBLES - Marrón/Madera */
+        body.theme-muebles {
+            background: linear-gradient(135deg, #FFF8DC 0%, #F5E6D3 100%);
+        }
+        body.theme-muebles .page-header {
+            background: linear-gradient(135deg, #8B4513 0%, #A0522D 100%);
+        }
+        body.theme-muebles .category-badge {
+            background: linear-gradient(135deg, #D2691E 0%, #8B4513 100%);
+            color: white;
+        }
+        body.theme-muebles .result-count {
+            background: rgba(139, 69, 19, 0.1);
+            color: #8B4513;
+        }
+        body.theme-muebles .filters-card {
+            border-left: 4px solid #8B4513;
+        }
+        
+        /* ELECTRONICA - Azul/Tech */
+        body.theme-electronica {
+            background: linear-gradient(135deg, #E3F2FD 0%, #BBDEFB 100%);
+        }
+        body.theme-electronica .page-header {
+            background: linear-gradient(135deg, #2196F3 0%, #1976D2 100%);
+        }
+        body.theme-electronica .category-badge {
+            background: linear-gradient(135deg, #42A5F5 0%, #1E88E5 100%);
+            color: white;
+        }
+        body.theme-electronica .result-count {
+            background: rgba(33, 150, 243, 0.1);
+            color: #1976D2;
+        }
+        body.theme-electronica .filters-card {
+            border-left: 4px solid #2196F3;
+        }
+        
+        /* DECORACION - Rosa/Violeta */
+        body.theme-decoracion {
+            background: linear-gradient(135deg, #FCE4EC 0%, #F8BBD0 100%);
+        }
+        body.theme-decoracion .page-header {
+            background: linear-gradient(135deg, #E91E63 0%, #C2185B 100%);
+        }
+        body.theme-decoracion .category-badge {
+            background: linear-gradient(135deg, #EC407A 0%, #D81B60 100%);
+            color: white;
+        }
+        body.theme-decoracion .result-count {
+            background: rgba(233, 30, 99, 0.1);
+            color: #C2185B;
+        }
+        body.theme-decoracion .filters-card {
+            border-left: 4px solid #E91E63;
+        }
+        
+        /* COCINA - Naranja/Rojo */
+        body.theme-cocina {
+            background: linear-gradient(135deg, #FFF3E0 0%, #FFE0B2 100%);
+        }
+        body.theme-cocina .page-header {
+            background: linear-gradient(135deg, #FF5722 0%, #E64A19 100%);
+        }
+        body.theme-cocina .category-badge {
+            background: linear-gradient(135deg, #FF6F42 0%, #FF5722 100%);
+            color: white;
+        }
+        body.theme-cocina .result-count {
+            background: rgba(255, 87, 34, 0.1);
+            color: #E64A19;
+        }
+        body.theme-cocina .filters-card {
+            border-left: 4px solid #FF5722;
+        }
+        
+        /* NEGOCIO - Verde/$$ */
+        body.theme-negocio {
+            background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%);
+        }
+        body.theme-negocio .page-header {
+            background: linear-gradient(135deg, #4CAF50 0%, #388E3C 100%);
+        }
+        body.theme-negocio .category-badge {
+            background: linear-gradient(135deg, #66BB6A 0%, #43A047 100%);
+            color: white;
+        }
+        body.theme-negocio .result-count {
+            background: rgba(76, 175, 80, 0.1);
+            color: #388E3C;
+        }
+        body.theme-negocio .filters-card {
+            border-left: 4px solid #4CAF50;
+        }
+        
+        /* OTROS - Gris/Neutro */
+        body.theme-otros {
+            background: linear-gradient(135deg, #ECEFF1 0%, #CFD8DC 100%);
+        }
+        body.theme-otros .page-header {
+            background: linear-gradient(135deg, #607D8B 0%, #455A64 100%);
+        }
+        body.theme-otros .category-badge {
+            background: linear-gradient(135deg, #78909C 0%, #546E7A 100%);
+            color: white;
+        }
+        body.theme-otros .result-count {
+            background: rgba(96, 125, 139, 0.1);
+            color: #455A64;
+        }
+        body.theme-otros .filters-card {
+            border-left: 4px solid #607D8B;
+        }
+    </style>
 </head>
 <body>
     <!-- Navigation -->
@@ -333,6 +564,105 @@
     <script src="app-dinamico.js"></script>
     
     <script>
+        // ============================================
+        // SISTEMA DE TEMAS POR CATEGORÍA
+        // ============================================
+        
+        const categoryThemes = {
+            muebles: {
+                name: 'Muebles',
+                icon: '🪑',
+                particles: ['🪑', '🛋️', '🪞', '🚪', '🛏️'],
+                title: 'Muebles de Calidad'
+            },
+            electronica: {
+                name: 'Electrónica',
+                icon: '💻',
+                particles: ['💻', '📱', '⌚', '🎮', '📷'],
+                title: 'Tecnología y Electrónica'
+            },
+            decoracion: {
+                name: 'Decoración',
+                icon: '🎨',
+                particles: ['🎨', '🖼️', '🕯️', '🌺', '✨'],
+                title: 'Decoración para tu Hogar'
+            },
+            cocina: {
+                name: 'Cocina',
+                icon: '🍳',
+                particles: ['🍳', '🔪', '🍽️', '☕', '🥘'],
+                title: 'Artículos de Cocina'
+            },
+            negocio: {
+                name: 'Negocio',
+                icon: '🏪',
+                particles: ['🏪', '💼', '📊', '💰', '🛒'],
+                title: 'Equipamiento de Negocio'
+            },
+            otros: {
+                name: 'Otros',
+                icon: '📦',
+                particles: ['📦', '🎁', '🔧', '⚡', '🌟'],
+                title: 'Productos Varios'
+            }
+        };
+
+        // Aplicar tema de categoría
+        function applyCategoryTheme() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const categoria = urlParams.get('categoria');
+            
+            if (categoria && categoryThemes[categoria]) {
+                const theme = categoryThemes[categoria];
+                const body = document.body;
+                const pageHeader = document.querySelector('.page-header');
+                const pageTitle = document.querySelector('.page-title');
+                
+                // Aplicar clase de tema al body
+                body.className = `theme-${categoria}`;
+                
+                // Crear badge de categoría
+                const badge = document.createElement('div');
+                badge.className = 'category-badge';
+                badge.innerHTML = `${theme.icon} ${theme.name}`;
+                
+                // Actualizar título
+                pageTitle.textContent = theme.title;
+                pageTitle.style.position = 'relative';
+                pageTitle.style.zIndex = '2';
+                
+                // Insertar badge antes del título
+                pageTitle.parentNode.insertBefore(badge, pageTitle);
+                
+                // Crear partículas animadas
+                createParticles(pageHeader, theme.particles);
+                
+                // Crear patrón de fondo
+                const pattern = document.createElement('div');
+                pattern.className = `category-pattern pattern-${categoria}`;
+                pageHeader.insertBefore(pattern, pageHeader.firstChild);
+            }
+        }
+
+        // Crear partículas animadas
+        function createParticles(container, emojis) {
+            const particlesContainer = document.createElement('div');
+            particlesContainer.className = 'category-particles';
+            
+            for (let i = 0; i < 15; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 10 + 's';
+                particle.style.animationDuration = (10 + Math.random() * 10) + 's';
+                particlesContainer.appendChild(particle);
+            }
+            
+            container.insertBefore(particlesContainer, container.firstChild);
+        }
+
         // Initialize AOS
         AOS.init({
             once: true,
@@ -340,6 +670,9 @@
             easing: 'ease-out-cubic'
         });
 
+        // Aplicar tema antes de inicializar catálogo
+        applyCategoryTheme();
+        
         // Initialize catalog
         initCatalog();
     </script>
