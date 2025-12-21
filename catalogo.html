@@ -3,35 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Catálogo Completo - Local Market</title>
-    <meta name="description" content="Explora todos los productos disponibles en tu marketplace local.">
+    <title>Catálogo - Local Market</title>
+    <meta name="description" content="Explora nuestro catálogo completo de productos de calidad a precios increíbles">
     
-    <!-- Bootstrap 5 -->
+    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
-    
-    <!-- AOS - Animate on Scroll -->
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    
     <!-- Bootstrap Icons -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    
+    <!-- AOS CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     
     <!-- Custom CSS -->
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top shadow-sm">
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
         <div class="container">
             <a class="navbar-brand" href="index.html">
-                <span class="brand-text">Local<span class="brand-accent">Market</span></span>
+                <span class="brand-name">Local<span class="brand-accent">Market</span></span>
             </a>
-            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
@@ -42,12 +36,6 @@
                     <li class="nav-item">
                         <a class="nav-link active" href="catalogo.html">Catálogo</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="index.html#como-comprar">Cómo Comprar</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="index.html#faq">FAQ</a>
-                    </li>
                 </ul>
             </div>
         </div>
@@ -55,29 +43,27 @@
 
     <!-- Page Header -->
     <section class="page-header">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-8">
-                    <h1 class="page-title" data-aos="fade-right">Catálogo Completo</h1>
-                    <p class="page-subtitle" data-aos="fade-right" data-aos-delay="100">
-                        Explora todos nuestros artículos en liquidación
-                    </p>
-                </div>
-                <div class="col-lg-4 text-lg-end mt-3 mt-lg-0" data-aos="fade-left">
-                    <span id="resultCount" class="result-count">Cargando...</span>
-                </div>
+        <div class="container text-center">
+            <h1 class="page-title" data-aos="fade-up">Catálogo Completo</h1>
+            <p class="page-subtitle" data-aos="fade-up" data-aos-delay="100">
+                Encuentra exactamente lo que necesitas
+            </p>
+            <div class="result-count mt-3" data-aos="fade-up" data-aos-delay="200">
+                <span id="resultCount">Cargando productos...</span>
             </div>
         </div>
     </section>
 
-    <!-- Filters and Catalog -->
+    <!-- Filters and Products -->
     <section class="catalog-section py-5">
         <div class="container">
-            <div class="row g-4">
-                
-                <!-- Sidebar Filters -->
-                <div class="col-lg-3">
-                    <div class="filters-sidebar" data-aos="fade-right">
+            <div class="row">
+                <!-- Filters Sidebar -->
+                <div class="col-lg-3 mb-4">
+                    <div class="filters-card" data-aos="fade-right">
+                        <h5 class="filters-title">
+                            <i class="bi bi-funnel me-2"></i>Filtros
+                        </h5>
                         
                         <!-- Search -->
                         <div class="filter-group">
@@ -101,6 +87,7 @@
                                 <option value="electronica">Electrónica</option>
                                 <option value="decoracion">Decoración</option>
                                 <option value="cocina">Cocina</option>
+                                <option value="negocio">Negocio</option>
                                 <option value="otros">Otros</option>
                             </select>
                         </div>
@@ -165,15 +152,13 @@
                                     <input type="number" 
                                            id="minPrice" 
                                            class="form-control form-control-sm" 
-                                           placeholder="Mín"
-                                           min="0">
+                                           placeholder="Mín">
                                 </div>
                                 <div class="col-6">
                                     <input type="number" 
                                            id="maxPrice" 
                                            class="form-control form-control-sm" 
-                                           placeholder="Máx"
-                                           min="0">
+                                           placeholder="Máx">
                                 </div>
                             </div>
                         </div>
@@ -185,18 +170,18 @@
                             </label>
                             <select id="sortBy" class="form-select">
                                 <option value="fecha-desc">Más recientes</option>
-                                <option value="precio-asc">Precio: Menor a Mayor</option>
-                                <option value="precio-desc">Precio: Mayor a Menor</option>
+                                <option value="precio-asc">Menor precio</option>
+                                <option value="precio-desc">Mayor precio</option>
                                 <option value="nombre">Nombre A-Z</option>
                             </select>
                         </div>
 
                         <!-- Hide Sold -->
                         <div class="filter-group">
-                            <div class="form-check form-switch">
+                            <div class="form-check">
                                 <input class="form-check-input" 
                                        type="checkbox" 
-                                       id="hideSold"
+                                       id="hideSold" 
                                        checked>
                                 <label class="form-check-label" for="hideSold">
                                     Ocultar vendidos
@@ -206,100 +191,72 @@
 
                         <!-- Clear Filters -->
                         <button id="clearFilters" class="btn btn-outline-secondary w-100 mt-3">
-                            <i class="bi bi-x-circle"></i> Limpiar Filtros
+                            <i class="bi bi-x-circle me-2"></i>Limpiar Filtros
                         </button>
-
                     </div>
                 </div>
 
                 <!-- Products Grid -->
                 <div class="col-lg-9">
                     <div id="productsGrid" class="row g-4">
-                        <!-- Products will be loaded here by JavaScript -->
+                        <!-- Products will be loaded here dynamically -->
+                        <div class="col-12 text-center py-5">
+                            <div class="spinner-border text-primary" role="status">
+                                <span class="visually-hidden">Cargando...</span>
+                            </div>
+                            <p class="mt-3">Cargando productos...</p>
+                        </div>
                     </div>
 
-                    <!-- No Results Message -->
+                    <!-- No Results -->
                     <div id="noResults" class="text-center py-5 d-none">
                         <i class="bi bi-search" style="font-size: 4rem; color: #ccc;"></i>
-                        <h3 class="mt-3">No se encontraron resultados</h3>
-                        <p class="text-muted">Intenta ajustar los filtros o términos de búsqueda</p>
+                        <h3 class="mt-3">No se encontraron productos</h3>
+                        <p class="text-muted">Intenta ajustar los filtros de búsqueda</p>
+                        <button class="btn btn-primary mt-3" onclick="clearFilters()">
+                            Limpiar Filtros
+                        </button>
                     </div>
                 </div>
-
             </div>
         </div>
     </section>
 
-    <!-- Modal de Detalle del Producto -->
-    <div class="modal fade" id="productModal" tabindex="-1" aria-hidden="true">
+    <!-- Product Modal -->
+    <div class="modal fade" id="productModal" tabindex="-1">
         <div class="modal-dialog modal-lg modal-dialog-centered">
             <div class="modal-content">
-                <div class="modal-header border-0">
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalTitle">Producto</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
-                    <div class="row g-4">
-                        <!-- Image Gallery -->
+                    <div class="row">
                         <div class="col-md-6">
-                            <div id="modalCarousel" class="carousel slide">
+                            <!-- Carousel for multiple images -->
+                            <div id="modalCarousel" class="carousel slide" data-bs-ride="false">
                                 <div class="carousel-inner" id="modalCarouselInner">
                                     <!-- Images will be loaded here -->
                                 </div>
                                 <button class="carousel-control-prev" type="button" data-bs-target="#modalCarousel" data-bs-slide="prev">
-                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                    <span class="visually-hidden">Anterior</span>
+                                    <span class="carousel-control-prev-icon"></span>
                                 </button>
                                 <button class="carousel-control-next" type="button" data-bs-target="#modalCarousel" data-bs-slide="next">
-                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                    <span class="visually-hidden">Siguiente</span>
+                                    <span class="carousel-control-next-icon"></span>
                                 </button>
+                                <!-- Indicators -->
+                                <div class="carousel-indicators" id="modalCarouselIndicators"></div>
                             </div>
+                            <!-- Photo counter -->
+                            <div id="modalPhotoCount" class="text-center mt-2 text-muted"></div>
                         </div>
-
-                        <!-- Product Info -->
                         <div class="col-md-6">
-                            <div id="modalBadge" class="mb-2"></div>
-                            <h2 id="modalTitle" class="modal-product-title"></h2>
-                            <div class="modal-price-section">
-                                <span id="modalPrice" class="modal-price"></span>
-                            </div>
-                            
-                            <div class="modal-meta">
-                                <div class="meta-item">
-                                    <i class="bi bi-tag"></i>
-                                    <span>Categoría: <strong id="modalCategoria"></strong></span>
-                                </div>
-                                <div class="meta-item">
-                                    <i class="bi bi-person-circle"></i>
-                                    <span>Vendedor: <strong id="modalVendedor"></strong></span>
-                                </div>
-                                <div class="meta-item">
-                                    <i class="bi bi-star"></i>
-                                    <span>Estado: <strong id="modalEstado"></strong></span>
-                                </div>
-                                <div class="meta-item">
-                                    <i class="bi bi-geo-alt"></i>
-                                    <span>Ubicación: <strong id="modalUbicacion"></strong></span>
-                                </div>
-                                <div class="meta-item">
-                                    <i class="bi bi-truck"></i>
-                                    <span>Entrega: <strong id="modalEntrega"></strong></span>
-                                </div>
-                            </div>
-
-                            <div class="modal-description">
-                                <h5>Descripción</h5>
-                                <p id="modalDescripcion"></p>
-                            </div>
-
-                            <div class="modal-actions">
-                                <a id="modalWhatsApp" href="#" class="btn btn-primary btn-lg w-100 mb-2" target="_blank">
-                                    <i class="bi bi-whatsapp me-2"></i>
-                                    Contactar por WhatsApp
-                                </a>
-                                <button type="button" class="btn btn-outline-secondary w-100" data-bs-dismiss="modal">
-                                    Seguir Navegando
-                                </button>
+                            <div class="modal-product-info">
+                                <div class="modal-price" id="modalPrice"></div>
+                                <div class="modal-meta-items" id="modalMeta"></div>
+                                <div class="modal-description" id="modalDescription"></div>
+                                <div class="modal-vendor-info" id="modalVendor"></div>
+                                <div id="modalActions" class="mt-3"></div>
                             </div>
                         </div>
                     </div>
@@ -315,13 +272,6 @@
                 <div class="col-md-4">
                     <h3 class="footer-title">Local<span class="brand-accent">Market</span></h3>
                     <p class="footer-text">Tu marketplace de barrio. Compra y vende productos de segunda mano localmente.</p>
-                    <!-- Redes sociales deshabilitadas - Descomentar cuando estén disponibles
-                    <div class="social-links">
-                        <a href="#" class="social-link"><i class="bi bi-facebook"></i></a>
-                        <a href="#" class="social-link"><i class="bi bi-instagram"></i></a>
-                        <a href="https://wa.me/56942229660" class="social-link"><i class="bi bi-whatsapp"></i></a>
-                    </div>
-                    -->
                 </div>
                 
                 <div class="col-md-4">
@@ -358,8 +308,8 @@
                                 Desarrollado por <strong>Carlos Jerez B.</strong>
                             </p>
                             <p class="developer-contact mb-0">
-                                <a href="/cdn-cgi/l/email-protection#c7ada2b5a2bda4a6b5aba8b4f0f787a0aaa6aeabe9a4a8aa">
-                                    <i class="bi bi-envelope"></i> <span class="__cf_email__" data-cfemail="78121d0a1d021b190a14170b4f48381f15191114561b1715">[email&#160;protected]</span>
+                                <a href="mailto:jerezcarlos70@gmail.com">
+                                    <i class="bi bi-envelope"></i> jerezcarlos70@gmail.com
                                 </a>
                                 <span class="mx-2">|</span>
                                 <a href="https://wa.me/56942229660?text=Hola,%20me%20interesa%20un%20sitio%20web" target="_blank">
@@ -374,7 +324,7 @@
     </footer>
 
     <!-- Bootstrap JS -->
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     
     <!-- AOS JS -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
@@ -384,3 +334,14 @@
     
     <script>
         // Initialize AOS
+        AOS.init({
+            once: true,
+            duration: 800,
+            easing: 'ease-out-cubic'
+        });
+
+        // Initialize catalog
+        initCatalog();
+    </script>
+</body>
+</html>
