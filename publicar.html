@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Publicar - Local Market</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+.image-upload-area{border:3px dashed #5B7B5A;border-radius:12px;padding:3rem;text-align:center;background:#E8F0E8;cursor:pointer;transition:all .3s}
+.image-upload-area:hover{background:#D0E5D0}
+.image-upload-area.dragover{border-color:#3E5A3D;background:#C0DFC0;transform:scale(1.02)}
+.upload-icon{font-size:4rem;color:#5B7B5A;margin-bottom:1rem}
+.image-previews{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:1rem;margin-top:1.5rem}
+.image-preview{position:relative;border-radius:12px;overflow:hidden;aspect-ratio:1;box-shadow:0 4px 12px rgba(0,0,0,.1)}
+.image-preview img{width:100%;height:100%;object-fit:cover}
+.image-preview-remove{position:absolute;top:5px;right:5px;background:rgba(244,67,54,.9);color:#fff;border:none;border-radius:50%;width:30px;height:30px;display:flex;align-items:center;justify-content:center;cursor:pointer}
+.image-preview-remove:hover{background:#c62828;transform:scale(1.1)}
+.image-counter{display:inline-block;background:#5B7B5A;color:#fff;padding:.5rem 1rem;border-radius:50px;font-weight:600;margin-top:1rem}
+.loading-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.8);display:flex;align-items:center;justify-content:center;z-index:9999}
+.loading-content{background:#fff;padding:2rem;border-radius:12px;text-align:center;max-width:400px}
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html"><span class="brand-text">Local<span class="brand-accent">Market</span></span></a>
+            <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarNav"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Inicio</a></li>
+                    <li class="nav-item"><a class="nav-link" href="catalogo.html">Catálogo</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="publicar.html">Publicar</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section class="py-5">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="card shadow" id="productForm">
+                        <div class="card-body p-4">
+                            <h1 class="text-center mb-3">Publicar Producto</h1>
+                            <div class="alert alert-warning text-center">
+                                <strong>⏳ Moderación:</strong> Tu producto será revisado en 24-48 horas
+                            </div>
+
+                            <form id="submitForm">
+                                <h5 class="mt-4 mb-3">📦 Información</h5>
+                                <div class="mb-3">
+                                    <label class="form-label">Nombre *</label>
+                                    <input type="text" class="form-control" name="nombre" required>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Precio (CLP) *</label>
+                                        <input type="number" class="form-control" name="precio" min="0" required>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Categoría *</label>
+                                        <select class="form-select" name="categoria" required>
+                                            <option value="">Selecciona...</option>
+                                            <option value="muebles">Muebles</option>
+                                            <option value="electronica">Electrónica</option>
+                                            <option value="decoracion">Decoración</option>
+                                            <option value="cocina">Cocina</option>
+                                            <option value="negocio">Negocio</option>
+                                            <option value="otros">Otros</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Estado *</label>
+                                    <select class="form-select" name="estado" required>
+                                        <option value="">Selecciona...</option>
+                                        <option value="nuevo">Nuevo</option>
+                                        <option value="como nuevo">Como Nuevo</option>
+                                        <option value="usado">Usado</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Descripción Corta *</label>
+                                    <input type="text" class="form-control" name="descripcionCorta" maxlength="100" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Descripción Detallada *</label>
+                                    <textarea class="form-control" name="descripcionLarga" rows="4" required></textarea>
+                                </div>
+
+                                <h5 class="mt-4 mb-3">📍 Ubicación</h5>
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Comuna *</label>
+                                        <input type="text" class="form-control" name="comuna" required>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Región *</label>
+                                        <select class="form-select" name="region" required>
+                                            <option value="">Selecciona...</option>
+                                            <option value="Metropolitana">Metropolitana</option>
+                                            <option value="Valparaíso">Valparaíso</option>
+                                            <option value="Biobío">Biobío</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Entrega *</label>
+                                    <select class="form-select" name="entrega" required>
+                                        <option value="">Selecciona...</option>
+                                        <option value="Solo retiro en domicilio">Solo Retiro</option>
+                                        <option value="Despacho incluido">Despacho Incluido</option>
+                                        <option value="Retiro o despacho">Retiro o Despacho</option>
+                                    </select>
+                                </div>
+
+                                <h5 class="mt-4 mb-3">📸 Fotos</h5>
+                                <div class="mb-3">
+                                    <div class="image-upload-area" id="uploadArea">
+                                        <input type="file" id="imageInput" accept="image/*" multiple style="display:none" required>
+                                        <div class="upload-icon"><i class="bi bi-cloud-upload"></i></div>
+                                        <h5>Arrastra fotos aquí</h5>
+                                        <p class="text-muted">o haz click</p>
+                                        <button type="button" class="btn btn-primary" onclick="document.getElementById('imageInput').click()">
+                                            Seleccionar Fotos
+                                        </button>
+                                        <p class="text-muted mt-2 mb-0"><small>Máx 5 fotos | 5MB cada una</small></p>
+                                    </div>
+                                    <div class="image-previews" id="imagePreviews"></div>
+                                    <div class="text-center" id="imageCounter" style="display:none">
+                                        <span class="image-counter"><i class="bi bi-images me-2"></i><span id="imageCount">0</span> foto(s)</span>
+                                    </div>
+                                </div>
+
+                                <h5 class="mt-4 mb-3">👤 Contacto</h5>
+                                <div class="mb-3">
+                                    <label class="form-label">Nombre *</label>
+                                    <input type="text" class="form-control" name="vendedor" required>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">WhatsApp *</label>
+                                        <input type="tel" class="form-control" name="whatsappvendedor" placeholder="56912345678" required>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Email *</label>
+                                        <input type="email" class="form-control" name="email" required>
+                                    </div>
+                                </div>
+
+                                <div class="form-check mb-4">
+                                    <input class="form-check-input" type="checkbox" id="terms" required>
+                                    <label class="form-check-label" for="terms">Acepto revisión previa</label>
+                                </div>
+
+                                <button type="submit" class="btn btn-primary w-100 btn-lg">
+                                    <i class="bi bi-send me-2"></i>Enviar para Revisión
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="alert alert-success text-center d-none" id="success">
+                        <h3>✅ Enviado</h3>
+                        <p>Te notificaremos por email</p>
+                        <button class="btn btn-primary" onclick="location.reload()">Publicar Otro</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="loading-overlay d-none" id="loading">
+        <div class="loading-content">
+            <div class="spinner-border text-primary mb-3"></div>
+            <h5 id="loadingText">Subiendo...</h5>
+            <div class="progress mt-3">
+                <div class="progress-bar progress-bar-animated" id="progress" style="width:0"></div>
+            </div>
+            <p class="mt-2" id="status">Preparando...</p>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+const SCRIPT_URL='https://script.google.com/macros/s/AKfycbwum5LhA9XzCH9cR3FsisYkeEDg37xmxMHKE4IbX7GmF4-PDPRh7r4hjOGCys_OkOSkPA/exec';
+const MAX_IMG=5,MAX_SIZE=5*1024*1024;
+let imgs=[];
+
+const area=document.getElementById('uploadArea'),input=document.getElementById('imageInput');
+area.onclick=()=>input.click();
+area.ondragover=e=>{e.preventDefault();area.classList.add('dragover')};
+area.ondragleave=()=>area.classList.remove('dragover');
+area.ondrop=e=>{e.preventDefault();area.classList.remove('dragover');handleFiles(e.dataTransfer.files)};
+input.onchange=e=>handleFiles(e.target.files);
+
+function handleFiles(files){
+    const arr=Array.from(files);
+    if(imgs.length+arr.length>MAX_IMG){alert('Máx '+MAX_IMG+' fotos');return}
+    arr.forEach(f=>{
+        if(!f.type.match('image')){alert(f.name+': formato inválido');return}
+        if(f.size>MAX_SIZE){alert(f.name+': máx 5MB');return}
+        imgs.push(f);
+        const r=new FileReader();
+        r.onload=e=>{
+            const d=document.createElement('div');
+            d.className='image-preview';
+            d.dataset.name=f.name;
+            d.innerHTML=`<img src="${e.target.result}"><button type="button" class="image-preview-remove" onclick="rmImg('${f.name}')"><i class="bi bi-x"></i></button>`;
+            document.getElementById('imagePreviews').appendChild(d);
+        };
+        r.readAsDataURL(f);
+    });
+    updateCounter();
+}
+
+function rmImg(name){
+    imgs=imgs.filter(i=>i.name!==name);
+    document.querySelector(`[data-name="${name}"]`).remove();
+    updateCounter();
+}
+
+function updateCounter(){
+    const c=document.getElementById('imageCounter'),n=document.getElementById('imageCount');
+    if(imgs.length>0){c.style.display='block';n.textContent=imgs.length;input.removeAttribute('required')}
+    else{c.style.display='none';input.setAttribute('required','required')}
+}
+
+function toBase64(f){
+    return new Promise((res,rej)=>{
+        const r=new FileReader();
+        r.onload=()=>res(r.result.split(',')[1]);
+        r.onerror=rej;
+        r.readAsDataURL(f);
+    });
+}
+
+document.getElementById('submitForm').onsubmit=async e=>{
+    e.preventDefault();
+    if(imgs.length===0){alert('Sube al menos 1 foto');return}
+    
+    document.getElementById('loading').classList.remove('d-none');
+    
+    try{
+        document.getElementById('status').textContent='Procesando...';
+        const imgData=await Promise.all(imgs.map(async(f,i)=>{
+            document.getElementById('progress').style.width=((i+1)/imgs.length*50)+'%';
+            const b64=await toBase64(f);
+            return{name:f.name,data:b64,mimeType:f.type};
+        }));
+        
+        const fd=new FormData(e.target),data={};
+        for(let[k,v]of fd.entries())data[k]=v;
+        data.images=imgData;
+        data.ubicacion=data.comuna+' - '+data.region;
+        data.fechaPublicacion=new Date().toISOString().split('T')[0];
+        data.disponibilidad='pendiente';
+        data.destacado='FALSE';
+        
+        document.getElementById('loadingText').textContent='Guardando...';
+        document.getElementById('status').textContent='Subiendo a Drive...';
+        document.getElementById('progress').style.width='75%';
+        
+        await fetch(SCRIPT_URL,{
+            method:'POST',
+            mode:'no-cors',
+            headers:{'Content-Type':'application/json'},
+            body:JSON.stringify(data)
+        });
+        
+        document.getElementById('progress').style.width='100%';
+        await new Promise(r=>setTimeout(r,500));
+        
+        document.getElementById('loading').classList.add('d-none');
+        document.getElementById('productForm').classList.add('d-none');
+        document.getElementById('success').classList.remove('d-none');
+        window.scrollTo({top:0,behavior:'smooth'});
+        
+    }catch(err){
+        console.error(err);
+        document.getElementById('loading').classList.add('d-none');
+        alert('Error. Intenta de nuevo.');
+    }
+};
+
+document.querySelector('[name="whatsappvendedor"]').oninput=e=>{
+    let v=e.target.value.replace(/\D/g,'');
+    if(v&&!v.startsWith('56'))v='56'+v;
+    e.target.value=v;
+};
+    </script>
+</body>
+</html>

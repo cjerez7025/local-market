@@ -10,7 +10,7 @@ const CONFIG = {
     dataSource: 'google-sheets', // Opciones: 'local', 'csv', 'google-sheets', 'json-remoto'
     
     // URLs de fuentes de datos remotas
-    googleSheetsURL: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRKBUF62AqdhPNNmI_vv4aqaQsDCv0p4EHrBObytWDcs2_GPyHjJ3bbnaOpv53JBQ7dZtq6luYCl2yJ/pub?gid=0&single=true&output=csv',
+    googleSheetsURL: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRKBUF62AqdhPNNmI_vv4aqaQsDCv0p4EHrBObytWDcs2_GPyHjJ3bbnaOpv53JBQ7dZtq6luYCl2yJ/pub?gid=31959420&single=true&output=csv',
     jsonURL: 'productos.json',
     csvURL: 'productos.csv',
     
