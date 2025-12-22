@@ -331,43 +331,97 @@ function openProductModal(productId) {
         `;
     
     carouselInner.innerHTML = imagenesHTML;
-    
+
+
     // Mostrar/ocultar controles del carrusel según número de imágenes
     const carouselControls = document.querySelectorAll('#modalCarousel .carousel-control-prev, #modalCarousel .carousel-control-next');
     carouselControls.forEach(control => {
-        if (numImagenes <= 1) {
-            control.style.display = 'none';
-        } else {
-            control.style.display = 'flex';
-        }
+        control.style.display = (numImagenes > 1) ? 'flex' : 'none';
     });
-    
-    // Crear indicadores (dots) si hay más de 1 imagen
+
+    // Indicadores (dots) usando el contenedor existente (no crear nodos extra)
+    const indicatorsContainer = document.getElementById('modalCarouselIndicators');
+    if (indicatorsContainer) {
+        if (numImagenes > 1) {
+            indicatorsContainer.innerHTML = producto.imagenes.map((_, index) => `
+                <button type="button"
+                        data-bs-target="#modalCarousel"
+                        data-bs-slide-to="${index}"
+                        ${index === 0 ? 'class="active" aria-current="true"' : ''}
+                        aria-label="Imagen ${index + 1}">
+                </button>
+            `).join('');
+            indicatorsContainer.style.display = '';
+        } else {
+            indicatorsContainer.innerHTML = '';
+            indicatorsContainer.style.display = 'none';
+        }
+    }
+
+    // Miniaturas (thumbnails) para navegar rápidamente entre imágenes
+    const thumbsContainer = document.getElementById('modalThumbs');
+    if (thumbsContainer) {
+        if (numImagenes > 1) {
+            thumbsContainer.innerHTML = producto.imagenes.map((img, index) => `
+                <button type="button" class="thumb-btn ${index === 0 ? 'active' : ''}" data-index="${index}" aria-label="Ver imagen ${index + 1}">
+                    <img class="thumb-img" src="${getImageURL(img)}" alt="${producto.nombre} ${index + 1}"
+                         onerror="this.src='https://placehold.co/140x105/e8e8e8/666666?text=Sin+Foto'">
+                </button>
+            `).join('');
+            thumbsContainer.classList.remove('d-none');
+        } else {
+            thumbsContainer.innerHTML = '';
+            thumbsContainer.classList.add('d-none');
+        }
+
+        // Bind una sola vez el click de miniaturas
+        if (!thumbsContainer.dataset.bound) {
+            thumbsContainer.addEventListener('click', (e) => {
+                const btn = e.target.closest('.thumb-btn');
+                if (!btn) return;
+                const idx = parseInt(btn.dataset.index, 10);
+                const carouselEl = document.getElementById('modalCarousel');
+                if (!carouselEl) return;
+                const carousel = bootstrap.Carousel.getOrCreateInstance(carouselEl, { interval: false, ride: false, touch: true, wrap: true });
+                carousel.to(idx);
+            });
+            thumbsContainer.dataset.bound = '1';
+        }
+    }
+
+    // Asegurar que el carrusel quede “reiniciado” y funcional tras cambiar el contenido
     const carouselElement = document.getElementById('modalCarousel');
-    let indicatorsHTML = '';
-    
-    if (numImagenes > 1) {
-        const indicators = producto.imagenes.map((_, index) => `
-            <button type="button" 
-                    data-bs-target="#modalCarousel" 
-                    data-bs-slide-to="${index}" 
-                    ${index === 0 ? 'class="active" aria-current="true"' : ''}
-                    aria-label="Imagen ${index + 1}">
-            </button>
-        `).join('');
-        
-        indicatorsHTML = `<div class="carousel-indicators">${indicators}</div>`;
+    if (carouselElement) {
+        const carousel = bootstrap.Carousel.getOrCreateInstance(carouselElement, { interval: false, ride: false, touch: true, wrap: true });
+        carousel.to(0);
+
+        // Sincronizar miniaturas al cambiar de imagen
+        if (carouselElement._lmSlideHandler) {
+            carouselElement.removeEventListener('slid.bs.carousel', carouselElement._lmSlideHandler);
+        }
+        carouselElement._lmSlideHandler = (ev) => {
+            const activeIndex = (typeof ev.to === 'number') ? ev.to : 0;
+
+            // Sync indicadores
+            const ind = document.getElementById('modalCarouselIndicators');
+            if (ind) {
+                const buttons = ind.querySelectorAll('button[data-bs-slide-to]');
+                buttons.forEach((b) => b.classList.remove('active'));
+                const current = ind.querySelector(`button[data-bs-slide-to="${activeIndex}"]`);
+                if (current) current.classList.add('active');
+            }
+
+            // Sync miniaturas
+            const thumbs = document.getElementById('modalThumbs');
+            if (thumbs) {
+                const btns = thumbs.querySelectorAll('.thumb-btn');
+                btns.forEach((b) => b.classList.remove('active'));
+                if (btns[activeIndex]) btns[activeIndex].classList.add('active');
+            }
+        };
+        carouselElement.addEventListener('slid.bs.carousel', carouselElement._lmSlideHandler);
     }
-    
-    // Insertar indicadores si no existen
-    const existingIndicators = carouselElement.querySelector('.carousel-indicators');
-    if (existingIndicators) {
-        existingIndicators.remove();
-    }
-    if (indicatorsHTML) {
-        carouselInner.insertAdjacentHTML('beforebegin', indicatorsHTML);
-    }
-    
+
     // Actualizar información del producto
     document.getElementById('modalBadge').innerHTML = getStatusBadgeHTML(producto);
     document.getElementById('modalTitle').textContent = producto.nombre;
