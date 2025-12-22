@@ -1,29 +1,25 @@
 /* ============================================
-   LIQUIDACIÓN TOTAL - APP DINÁMICO
-   Sistema flexible para cargar productos desde diferentes fuentes
+   LOCAL MARKET - APP DINÁMICO CORREGIDO
+   Versión: 2.0 - Diciembre 2024
    ============================================ */
 
 // ============================================
-// CONFIGURACIÓN - Elige tu método de datos
+// CONFIGURACIÓN
 // ============================================
 const CONFIG = {
-    // Opciones: 'local', 'csv', 'google-sheets', 'json-remoto'
-    dataSource: 'google-sheets',
+    dataSource: 'google-sheets', // Opciones: 'local', 'csv', 'google-sheets', 'json-remoto'
     
     // URLs de fuentes de datos remotas
     googleSheetsURL: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRKBUF62AqdhPNNmI_vv4aqaQsDCv0p4EHrBObytWDcs2_GPyHjJ3bbnaOpv53JBQ7dZtq6luYCl2yJ/pub?gid=0&single=true&output=csv',
-    jsonURL: 'https://tu-servidor.com/productos.json',
+    jsonURL: 'productos.json',
     csvURL: 'productos.csv',
     
     // Configuración de imágenes
-    imageBase: 'https://lh3.googleusercontent.com/d/', // Servidor alternativo de Google
-    // imageBase: 'https://drive.google.com/uc?export=view&id=', // Original
-    // imageBase: 'https://tu-cdn.com/images/', // Para CDN personalizado
-    // imageBase: 'assets/products/', // Para imágenes locales
+    imageBase: 'https://lh3.googleusercontent.com/d/',
 };
 
 // ============================================
-// DATOS LOCALES (Backup o modo offline)
+// DATOS LOCALES (Datos de respaldo)
 // ============================================
 const productosLocal = [
     {
@@ -34,23 +30,64 @@ const productosLocal = [
         estado: "como nuevo",
         descripcionCorta: "Sofá esquinero de 5 puestos en excelente estado",
         descripcionLarga: "Sofá seccional en forma de L, tapizado en tela gris de alta calidad. Muy cómodo y espacioso, perfecto para living grandes. Incluye cojines decorativos. Sin manchas ni desgaste visible.",
-        // Para Google Drive: usa IDs de archivo
         imagenes: [
-            "1ABC123xyz", // Reemplaza con tu ID de Google Drive
-            "2DEF456uvw"
+            "https://placehold.co/800x600/5B7B5A/FFFFFF?text=Sofa+1",
+            "https://placehold.co/800x600/5B7B5A/FFFFFF?text=Sofa+2"
         ],
-        // O URLs completas
-        // imagenes: [
-        //     "https://drive.google.com/uc?export=view&id=1ABC123xyz",
-        //     "https://i.imgur.com/imagen.jpg"
-        // ],
-        ubicacion: "Ñuñoa, RM",
+        ubicacion: "Ñuñoa - RM",
+        comuna: "Ñuñoa",
+        region: "Metropolitana",
         entrega: "Solo retiro en domicilio",
         disponibilidad: "disponible",
         fechaPublicacion: "2024-12-15",
-        destacado: true
+        destacado: true,
+        vendedor: "María González",
+        whatsappvendedor: "56942229660"
     },
-    // ... más productos
+    {
+        id: 2,
+        nombre: "Notebook HP i5 8GB RAM",
+        precio: 350000,
+        categoria: "electronica",
+        estado: "como nuevo",
+        descripcionCorta: "Laptop HP Pavilion 15 con procesador Intel i5",
+        descripcionLarga: "Notebook HP Pavilion 15 pulgadas, procesador Intel Core i5 de 11va generación, 8GB RAM, 256GB SSD. Incluye cargador original y bolso de transporte.",
+        imagenes: [
+            "https://placehold.co/800x600/2196F3/FFFFFF?text=Notebook+1",
+            "https://placehold.co/800x600/2196F3/FFFFFF?text=Notebook+2",
+            "https://placehold.co/800x600/2196F3/FFFFFF?text=Notebook+3"
+        ],
+        ubicacion: "Providencia - RM",
+        comuna: "Providencia",
+        region: "Metropolitana",
+        entrega: "Retiro o despacho (costo aparte)",
+        disponibilidad: "disponible",
+        fechaPublicacion: "2024-12-16",
+        destacado: true,
+        vendedor: "Carlos Muñoz",
+        whatsappvendedor: "56943344556"
+    },
+    {
+        id: 3,
+        nombre: "Espejo Decorativo Dorado 120cm",
+        precio: 85000,
+        categoria: "decoracion",
+        estado: "nuevo",
+        descripcionCorta: "Espejo redondo con marco dorado de 120cm",
+        descripcionLarga: "Espejo decorativo circular con elegante marco dorado envejecado. Diámetro 120cm. Perfecto para living o dormitorio.",
+        imagenes: [
+            "https://placehold.co/800x600/E91E63/FFFFFF?text=Espejo"
+        ],
+        ubicacion: "Pirque - RM",
+        comuna: "Pirque",
+        region: "Metropolitana",
+        entrega: "Solo retiro en domicilio",
+        disponibilidad: "disponible",
+        fechaPublicacion: "2024-12-17",
+        destacado: true,
+        vendedor: "Local Market",
+        whatsappvendedor: "56942229660"
+    }
 ];
 
 // ============================================
@@ -82,7 +119,6 @@ async function cargarProductos() {
         return productos;
     } catch (error) {
         console.error('❌ Error cargando productos:', error);
-        // Fallback a datos locales
         productos = productosLocal;
         return productos;
     }
@@ -129,13 +165,11 @@ function parseCSVToProducts(csv) {
         headers.forEach((header, i) => {
             const value = values[i]?.trim() || '';
             
-            // Conversión de tipos
             switch(header.toLowerCase()) {
                 case 'precio':
                     producto.precio = parseFloat(value) || 0;
                     break;
                 case 'imagenes':
-                    // Espera IDs separados por pipe: "id1|id2|id3"
                     producto.imagenes = value.split('|').map(id => id.trim()).filter(Boolean);
                     break;
                 case 'destacado':
@@ -150,7 +184,6 @@ function parseCSVToProducts(csv) {
     });
 }
 
-// Parse CSV considerando comillas
 function parseCSVLine(line) {
     const result = [];
     let current = '';
@@ -177,33 +210,32 @@ function parseCSVLine(line) {
 // PROCESAR URLs DE IMÁGENES
 // ============================================
 function getImageURL(imagen) {
-    // Si ya es una URL completa, retornarla
+    if (!imagen) return 'https://placehold.co/600x450/e8e8e8/666666?text=Sin+Foto';
+    
     if (imagen.startsWith('http://') || imagen.startsWith('https://')) {
         return imagen;
     }
     
-    // Si es un ID de Google Drive
     if (CONFIG.imageBase.includes('drive.google.com')) {
         return `${CONFIG.imageBase}${imagen}`;
     }
     
-    // Para rutas locales o CDN
     return `${CONFIG.imageBase}${imagen}`;
 }
 
 // ============================================
-// FUNCIONES AUXILIARES (sin cambios)
+// FUNCIONES AUXILIARES
 // ============================================
 function formatPrice(price) {
     return `$${price.toLocaleString('es-CL')}`;
 }
 
 function capitalize(str) {
+    if (!str) return '';
     return str.charAt(0).toUpperCase() + str.slice(1);
 }
 
 function formatWhatsApp(numero) {
-    // Convierte 56942229660 a +56 9 4222 9660
     if (!numero) return '';
     const num = numero.toString();
     if (num.startsWith('56') && num.length === 11) {
@@ -214,7 +246,6 @@ function formatWhatsApp(numero) {
 
 function generateWhatsAppMessage(producto) {
     const mensaje = `Hola, me interesa: *${producto.nombre}* (${formatPrice(producto.precio)}). ¿Sigue disponible?`;
-    // Usar WhatsApp del vendedor si existe, sino usar el general
     const whatsapp = producto.whatsappvendedor || producto.whatsapp_vendedor || '56942229660';
     return `https://wa.me/${whatsapp}?text=${encodeURIComponent(mensaje)}`;
 }
@@ -234,13 +265,13 @@ function getStatusBadgeHTML(producto) {
         'usado': 'badge-usado'
     };
     
-    badges.push(`<span class="badge-status ${estadoMap[producto.estado]}">${capitalize(producto.estado)}</span>`);
+    badges.push(`<span class="badge-status ${estadoMap[producto.estado] || 'badge-usado'}">${capitalize(producto.estado)}</span>`);
     
     return badges.join('');
 }
 
 // ============================================
-// CREAR CARD DE PRODUCTO (Actualizado)
+// CREAR CARD DE PRODUCTO
 // ============================================
 function createProductCard(producto) {
     const imagenPrincipal = producto.imagenes && producto.imagenes.length > 0 
@@ -271,7 +302,7 @@ function createProductCard(producto) {
                 <div class="product-body">
                     <div class="product-category">${capitalize(producto.categoria)}</div>
                     <h3 class="product-title">${producto.nombre}</h3>
-                    <p class="product-description">${producto.descripcionCorta}</p>
+                    <p class="product-description">${producto.descripcionCorta || ''}</p>
                     ${producto.vendedor ? `
                     <div class="product-seller-info">
                         <div class="seller-name">
@@ -286,14 +317,14 @@ function createProductCard(producto) {
                     </div>
                     ` : ''}
                     <div class="product-meta">
-                        <span><i class="bi bi-geo-alt"></i> ${producto.comuna}${producto.region ? `, ${producto.region}` : ''}</span>
+                        <span><i class="bi bi-geo-alt"></i> ${producto.comuna || producto.ubicacion}</span>
                         <span><i class="bi bi-truck"></i> ${producto.entrega}</span>
                     </div>
                     <div class="product-footer">
                         <div class="product-price">${formatPrice(producto.precio)}</div>
                         <div class="product-actions">
                             <button class="btn btn-primary btn-sm" 
-                                    onclick="openProductModal(${producto.id})"
+                                    onclick="openProductModal('${producto.id}')"
                                     ${!disponible ? 'disabled' : ''}>
                                 Ver Detalle
                             </button>
@@ -306,44 +337,49 @@ function createProductCard(producto) {
 }
 
 // ============================================
-// MODAL DE PRODUCTO (Actualizado)
+// MODAL DE PRODUCTO - VERSIÓN CORREGIDA
 // ============================================
 function openProductModal(productId) {
-    const producto = productos.find(p => p.id === productId);
-    if (!producto) return;
+    // Comparación flexible: los IDs de Google Sheets vienen como strings
+    const producto = productos.find(p => p.id == productId || p.id === String(productId));
+    if (!producto) {
+        console.error('Producto no encontrado:', productId);
+        console.log('IDs disponibles:', productos.map(p => p.id));
+        return;
+    }
     
+    // Configurar carrusel de imágenes
     const carouselInner = document.getElementById('modalCarouselInner');
+    const carouselIndicators = document.getElementById('modalCarouselIndicators');
     const numImagenes = producto.imagenes && producto.imagenes.length > 0 ? producto.imagenes.length : 0;
     
     // Crear slides del carrusel
-    const imagenesHTML = numImagenes > 0 
-        ? producto.imagenes.map((img, index) => `
+    if (numImagenes > 0) {
+        carouselInner.innerHTML = producto.imagenes.map((img, index) => `
             <div class="carousel-item ${index === 0 ? 'active' : ''}">
                 <img src="${getImageURL(img)}" 
-                     alt="${producto.nombre}" 
+                     alt="${producto.nombre} - Imagen ${index + 1}" 
                      onerror="this.src='https://placehold.co/600x450/e8e8e8/666666?text=Sin+Foto'">
             </div>
-        `).join('')
-        : `
+        `).join('');
+    } else {
+        carouselInner.innerHTML = `
             <div class="carousel-item active">
                 <img src="https://placehold.co/600x450/e8e8e8/666666?text=Sin+Foto" alt="${producto.nombre}">
             </div>
         `;
-    
-    carouselInner.innerHTML = imagenesHTML;
+    }
 
-
-    // Mostrar/ocultar controles del carrusel según número de imágenes
+    // Mostrar/ocultar controles del carrusel
     const carouselControls = document.querySelectorAll('#modalCarousel .carousel-control-prev, #modalCarousel .carousel-control-next');
     carouselControls.forEach(control => {
         control.style.display = (numImagenes > 1) ? 'flex' : 'none';
     });
 
-    // Indicadores (dots) usando el contenedor existente (no crear nodos extra)
-    const indicatorsContainer = document.getElementById('modalCarouselIndicators');
-    if (indicatorsContainer) {
+    // Indicadores del carrusel
+    if (carouselIndicators) {
         if (numImagenes > 1) {
-            indicatorsContainer.innerHTML = producto.imagenes.map((_, index) => `
+            carouselIndicators.innerHTML = producto.imagenes.map((_, index) => `
                 <button type="button"
                         data-bs-target="#modalCarousel"
                         data-bs-slide-to="${index}"
@@ -351,54 +387,67 @@ function openProductModal(productId) {
                         aria-label="Imagen ${index + 1}">
                 </button>
             `).join('');
-            indicatorsContainer.style.display = '';
+            carouselIndicators.style.display = '';
         } else {
-            indicatorsContainer.innerHTML = '';
-            indicatorsContainer.style.display = 'none';
+            carouselIndicators.innerHTML = '';
+            carouselIndicators.style.display = 'none';
         }
     }
 
-    // Miniaturas (thumbnails) para navegar rápidamente entre imágenes
+    // Miniaturas
     const thumbsContainer = document.getElementById('modalThumbs');
     if (thumbsContainer) {
         if (numImagenes > 1) {
             thumbsContainer.innerHTML = producto.imagenes.map((img, index) => `
-                <button type="button" class="thumb-btn ${index === 0 ? 'active' : ''}" data-index="${index}" aria-label="Ver imagen ${index + 1}">
-                    <img class="thumb-img" src="${getImageURL(img)}" alt="${producto.nombre} ${index + 1}"
+                <button type="button" 
+                        class="thumb-btn ${index === 0 ? 'active' : ''}" 
+                        data-index="${index}" 
+                        aria-label="Ver imagen ${index + 1}">
+                    <img class="thumb-img" 
+                         src="${getImageURL(img)}" 
+                         alt="${producto.nombre} ${index + 1}"
                          onerror="this.src='https://placehold.co/140x105/e8e8e8/666666?text=Sin+Foto'">
                 </button>
             `).join('');
             thumbsContainer.classList.remove('d-none');
+            
+            // Bind click de miniaturas solo si no está ya bound
+            if (!thumbsContainer.dataset.bound) {
+                thumbsContainer.addEventListener('click', (e) => {
+                    const btn = e.target.closest('.thumb-btn');
+                    if (!btn) return;
+                    
+                    const idx = parseInt(btn.dataset.index, 10);
+                    const carouselEl = document.getElementById('modalCarousel');
+                    if (!carouselEl) return;
+                    
+                    const carousel = bootstrap.Carousel.getOrCreateInstance(carouselEl);
+                    carousel.to(idx);
+                });
+                thumbsContainer.dataset.bound = '1';
+            }
         } else {
             thumbsContainer.innerHTML = '';
             thumbsContainer.classList.add('d-none');
         }
-
-        // Bind una sola vez el click de miniaturas
-        if (!thumbsContainer.dataset.bound) {
-            thumbsContainer.addEventListener('click', (e) => {
-                const btn = e.target.closest('.thumb-btn');
-                if (!btn) return;
-                const idx = parseInt(btn.dataset.index, 10);
-                const carouselEl = document.getElementById('modalCarousel');
-                if (!carouselEl) return;
-                const carousel = bootstrap.Carousel.getOrCreateInstance(carouselEl, { interval: false, ride: false, touch: true, wrap: true });
-                carousel.to(idx);
-            });
-            thumbsContainer.dataset.bound = '1';
-        }
     }
 
-    // Asegurar que el carrusel quede “reiniciado” y funcional tras cambiar el contenido
+    // Reiniciar carrusel
     const carouselElement = document.getElementById('modalCarousel');
     if (carouselElement) {
-        const carousel = bootstrap.Carousel.getOrCreateInstance(carouselElement, { interval: false, ride: false, touch: true, wrap: true });
+        const carousel = bootstrap.Carousel.getOrCreateInstance(carouselElement, { 
+            interval: false, 
+            ride: false, 
+            touch: true, 
+            wrap: true 
+        });
         carousel.to(0);
 
         // Sincronizar miniaturas al cambiar de imagen
         if (carouselElement._lmSlideHandler) {
             carouselElement.removeEventListener('slid.bs.carousel', carouselElement._lmSlideHandler);
         }
+        
         carouselElement._lmSlideHandler = (ev) => {
             const activeIndex = (typeof ev.to === 'number') ? ev.to : 0;
 
@@ -419,57 +468,98 @@ function openProductModal(productId) {
                 if (btns[activeIndex]) btns[activeIndex].classList.add('active');
             }
         };
+        
         carouselElement.addEventListener('slid.bs.carousel', carouselElement._lmSlideHandler);
     }
 
-    // Actualizar información del producto
-    document.getElementById('modalBadge').innerHTML = getStatusBadgeHTML(producto);
-    document.getElementById('modalTitle').textContent = producto.nombre;
-    document.getElementById('modalPrice').textContent = formatPrice(producto.precio);
-    document.getElementById('modalCategoria').textContent = capitalize(producto.categoria);
-    document.getElementById('modalEstado').textContent = capitalize(producto.estado);
-    document.getElementById('modalUbicacion').textContent = producto.ubicacion;
-    document.getElementById('modalEntrega').textContent = producto.entrega;
-    document.getElementById('modalDescripcion').textContent = producto.descripcionLarga || producto.descripcionCorta;
+    // ============================================
+    // ACTUALIZAR INFORMACIÓN DEL PRODUCTO
+    // ============================================
     
-    // Actualizar vendedor si existe el elemento en el DOM
-    const vendedorElement = document.getElementById('modalVendedor');
-    if (vendedorElement) {
-        vendedorElement.textContent = producto.vendedor || 'Local Market';
-    }
-    
-    // Agregar contador de fotos en el modal
-    const modalPriceSection = document.querySelector('.modal-price-section');
-    const existingPhotoCount = modalPriceSection ? modalPriceSection.querySelector('.modal-photo-count') : null;
-    if (existingPhotoCount) {
-        existingPhotoCount.remove();
-    }
-    if (numImagenes > 1 && modalPriceSection) {
-        modalPriceSection.insertAdjacentHTML('afterend', `
-            <div class="modal-photo-count">
-                <i class="bi bi-images"></i> ${numImagenes} fotografías disponibles
+    // Título
+    const modalTitle = document.getElementById('modalTitle');
+    if (modalTitle) modalTitle.textContent = producto.nombre;
+
+    // Precio
+    const modalPrice = document.getElementById('modalPrice');
+    if (modalPrice) modalPrice.textContent = formatPrice(producto.precio);
+
+    // Meta información
+    const modalMeta = document.getElementById('modalMeta');
+    if (modalMeta) {
+        modalMeta.innerHTML = `
+            <div class="meta-item">
+                <i class="bi bi-tag"></i>
+                <span>${capitalize(producto.categoria)}</span>
             </div>
-        `);
+            <div class="meta-item">
+                <i class="bi bi-star"></i>
+                <span>${capitalize(producto.estado)}</span>
+            </div>
+            <div class="meta-item">
+                <i class="bi bi-geo-alt"></i>
+                <span>${producto.comuna || producto.ubicacion}${producto.region ? ', ' + producto.region : ''}</span>
+            </div>
+            <div class="meta-item">
+                <i class="bi bi-truck"></i>
+                <span>${producto.entrega}</span>
+            </div>
+        `;
     }
-    
-    // Actualizar botón de WhatsApp
-    const whatsappBtn = document.getElementById('modalWhatsApp');
-    whatsappBtn.href = generateWhatsAppMessage(producto);
-    
-    if (producto.disponibilidad !== 'disponible') {
-        whatsappBtn.classList.add('disabled');
-        whatsappBtn.innerHTML = '<i class="bi bi-x-circle me-2"></i>No Disponible';
-    } else {
-        whatsappBtn.classList.remove('disabled');
-        whatsappBtn.innerHTML = '<i class="bi bi-whatsapp me-2"></i>Contactar por WhatsApp';
+
+    // Descripción
+    const modalDescription = document.getElementById('modalDescription');
+    if (modalDescription) {
+        modalDescription.textContent = producto.descripcionLarga || producto.descripcionCorta || '';
     }
-    
+
+    // Información del vendedor
+    const modalVendor = document.getElementById('modalVendor');
+    if (modalVendor && producto.vendedor) {
+        modalVendor.innerHTML = `
+            <h5 class="mb-3"><i class="bi bi-person-circle me-2"></i>Información del Vendedor</h5>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <i class="bi bi-person-fill"></i>
+                    <span>${producto.vendedor}</span>
+                </div>
+                ${producto.whatsappvendedor || producto.whatsapp_vendedor ? `
+                <div class="contact-item">
+                    <i class="bi bi-whatsapp"></i>
+                    <span>${formatWhatsApp(producto.whatsappvendedor || producto.whatsapp_vendedor)}</span>
+                </div>
+                ` : ''}
+            </div>
+        `;
+    }
+
+    // Acciones (botón WhatsApp)
+    const modalActions = document.getElementById('modalActions');
+    if (modalActions) {
+        if (producto.disponibilidad === 'disponible') {
+            modalActions.innerHTML = `
+                <a href="${generateWhatsAppMessage(producto)}" 
+                   class="btn btn-whatsapp btn-lg w-100" 
+                   target="_blank">
+                    <i class="bi bi-whatsapp me-2"></i>Contactar por WhatsApp
+                </a>
+            `;
+        } else {
+            modalActions.innerHTML = `
+                <button class="btn btn-secondary btn-lg w-100" disabled>
+                    Producto ${producto.disponibilidad}
+                </button>
+            `;
+        }
+    }
+
+    // Mostrar el modal
     const modal = new bootstrap.Modal(document.getElementById('productModal'));
     modal.show();
 }
 
 // ============================================
-// FILTRADO Y BÚSQUEDA (sin cambios)
+// FILTRADO Y BÚSQUEDA
 // ============================================
 let filteredProducts = [];
 
@@ -481,7 +571,7 @@ function applyFilters() {
     const comuna = document.getElementById('comunaFilter')?.value || '';
     const minPrice = parseFloat(document.getElementById('minPrice')?.value) || 0;
     const maxPrice = parseFloat(document.getElementById('maxPrice')?.value) || Infinity;
-    const hideSold = document.getElementById('hideSold')?.checked || false;
+    const hideSold = document.getElementById('hideSold')?.checked !== false;
     
     filteredProducts = productos.filter(producto => {
         const matchesSearch = searchTerm === '' || 
@@ -496,12 +586,13 @@ function applyFilters() {
         const matchesPrice = producto.precio >= minPrice && producto.precio <= maxPrice;
         const matchesAvailability = !hideSold || producto.disponibilidad !== 'vendido';
         
-        return matchesSearch && matchesCategory && matchesEstado && matchesRegion && matchesComuna && matchesPrice && matchesAvailability;
+        return matchesSearch && matchesCategory && matchesEstado && matchesRegion && 
+               matchesComuna && matchesPrice && matchesAvailability;
     });
     
     applySorting();
     renderProducts();
-    updateComunaFilter(); // Actualizar comunas disponibles según región
+    updateComunaFilter();
 }
 
 function applySorting() {
@@ -515,7 +606,7 @@ function applySorting() {
         if (aDestacado && !bDestacado) return -1;
         if (!aDestacado && bDestacado) return 1;
         
-        // PRIORIDAD 2: Criterio de ordenamiento seleccionado
+        // PRIORIDAD 2: Criterio de ordenamiento
         switch(sortBy) {
             case 'precio-asc':
                 return a.precio - b.precio;
@@ -579,16 +670,14 @@ function updateComunaFilter() {
     
     const selectedRegion = regionFilter.value;
     
-    // Obtener comunas únicas de la región seleccionada (o todas si no hay filtro)
     const comunas = [...new Set(
         productos
             .filter(p => selectedRegion === '' || p.region === selectedRegion)
             .map(p => p.comuna)
-            .filter(c => c) // Filtrar valores undefined/null
+            .filter(c => c)
             .sort()
     )];
     
-    // Actualizar opciones del select de comunas
     comunaFilter.innerHTML = '<option value="">Todas las comunas</option>' +
         comunas.map(comuna => `<option value="${comuna}">${comuna}</option>`).join('');
 }
@@ -600,9 +689,8 @@ function loadFeaturedProducts() {
     const container = document.getElementById('featuredProductsContainer');
     const indicators = document.getElementById('featuredIndicators');
     
-    if (!container) return; // Solo cargar si estamos en la página principal
+    if (!container) return;
     
-    // Filtrar productos destacados
     const featured = productos.filter(p => 
         p.destacado === true || 
         p.destacado === 'true' || 
@@ -610,7 +698,6 @@ function loadFeaturedProducts() {
     );
     
     if (featured.length === 0) {
-        // Si no hay destacados, mostrar mensaje
         container.innerHTML = `
             <div class="carousel-item active">
                 <div class="text-center py-5">
@@ -623,7 +710,6 @@ function loadFeaturedProducts() {
         return;
     }
     
-    // Agrupar productos de 3 en 3 para el carrusel (responsive)
     const itemsPerSlide = window.innerWidth < 768 ? 1 : (window.innerWidth < 992 ? 2 : 3);
     const slides = [];
     
@@ -631,7 +717,6 @@ function loadFeaturedProducts() {
         slides.push(featured.slice(i, i + itemsPerSlide));
     }
     
-    // Crear slides del carrusel
     container.innerHTML = slides.map((slideProducts, index) => `
         <div class="carousel-item ${index === 0 ? 'active' : ''}">
             <div class="row g-4 px-3">
@@ -640,7 +725,6 @@ function loadFeaturedProducts() {
         </div>
     `).join('');
     
-    // Crear indicadores
     if (indicators && slides.length > 1) {
         indicators.innerHTML = slides.map((_, index) => `
             <button type="button" 
@@ -690,7 +774,7 @@ function createFeaturedCard(producto) {
                     <div class="featured-price">${formatPrice(producto.precio)}</div>
                     <div class="featured-actions">
                         <button class="btn btn-primary w-100" 
-                                onclick="openProductModal(${producto.id})"
+                                onclick="openProductModal('${producto.id}')"
                                 ${!disponible ? 'disabled' : ''}>
                             <i class="bi bi-eye me-2"></i>Ver Detalle
                         </button>
@@ -709,18 +793,16 @@ function createFeaturedCard(producto) {
 }
 
 // ============================================
-// INICIALIZACIÓN
+// INICIALIZACIÓN DEL CATÁLOGO
 // ============================================
 async function initCatalog() {
     if (!document.getElementById('productsGrid')) return;
     
-    // Mostrar loading
     const grid = document.getElementById('productsGrid');
     if (grid) {
         grid.innerHTML = '<div class="col-12 text-center py-5"><div class="spinner-border text-primary" role="status"><span class="visually-hidden">Cargando...</span></div><p class="mt-3">Cargando productos...</p></div>';
     }
     
-    // Cargar productos
     await cargarProductos();
     
     // Aplicar filtro de categoría si viene por URL
@@ -753,7 +835,6 @@ async function initCatalog() {
     if (hideSold) hideSold.addEventListener('change', applyFilters);
     if (clearFiltersBtn) clearFiltersBtn.addEventListener('click', clearFilters);
     
-    // Renderizar
     applyFilters();
 }
 
@@ -770,13 +851,11 @@ function debounce(func, wait) {
 }
 
 // ============================================
-// CARGAR AL INICIO
+// INICIALIZACIÓN GLOBAL
 // ============================================
 document.addEventListener('DOMContentLoaded', async function() {
-    // Cargar productos globalmente
     await cargarProductos();
     
-    // Cargar productos destacados en home (carrusel)
     const featuredContainer = document.getElementById('featuredProductsContainer');
     if (featuredContainer) {
         loadFeaturedProducts();
