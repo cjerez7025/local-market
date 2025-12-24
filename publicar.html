@@ -8,18 +8,42 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="styles.css">
     <style>
-.image-upload-area{border:3px dashed #5B7B5A;border-radius:12px;padding:3rem;text-align:center;background:#E8F0E8;cursor:pointer;transition:all .3s}
+.image-upload-area{border:3px dashed #5B7B5A;border-radius:12px;padding:2rem 1rem;text-align:center;background:#E8F0E8;cursor:pointer;transition:all .3s}
 .image-upload-area:hover{background:#D0E5D0}
 .image-upload-area.dragover{border-color:#3E5A3D;background:#C0DFC0;transform:scale(1.02)}
-.upload-icon{font-size:4rem;color:#5B7B5A;margin-bottom:1rem}
+.upload-icon{font-size:3rem;color:#5B7B5A;margin-bottom:1rem}
 .image-previews{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:1rem;margin-top:1.5rem}
 .image-preview{position:relative;border-radius:12px;overflow:hidden;aspect-ratio:1;box-shadow:0 4px 12px rgba(0,0,0,.1)}
 .image-preview img{width:100%;height:100%;object-fit:cover}
-.image-preview-remove{position:absolute;top:5px;right:5px;background:rgba(244,67,54,.9);color:#fff;border:none;border-radius:50%;width:30px;height:30px;display:flex;align-items:center;justify-content:center;cursor:pointer}
+.image-preview-remove{position:absolute;top:5px;right:5px;background:rgba(244,67,54,.9);color:#fff;border:none;border-radius:50%;width:35px;height:35px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1.2rem}
 .image-preview-remove:hover{background:#c62828;transform:scale(1.1)}
 .image-counter{display:inline-block;background:#5B7B5A;color:#fff;padding:.5rem 1rem;border-radius:50px;font-weight:600;margin-top:1rem}
 .loading-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.8);display:flex;align-items:center;justify-content:center;z-index:9999}
 .loading-content{background:#fff;padding:2rem;border-radius:12px;text-align:center;max-width:400px}
+
+/* OPTIMIZACIÓN MÓVIL */
+@media (max-width: 768px) {
+    .image-upload-area {
+        padding: 3rem 1rem;
+    }
+    .upload-icon {
+        font-size: 4rem;
+    }
+    .btn-select-photos {
+        font-size: 1.1rem;
+        padding: 1rem 2rem;
+        min-height: 60px;
+    }
+    .image-previews {
+        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+        gap: 0.75rem;
+    }
+    .image-preview-remove {
+        width: 40px;
+        height: 40px;
+        font-size: 1.4rem;
+    }
+}
     </style>
 </head>
 <body>
@@ -48,39 +72,39 @@
                                 <i class="bi bi-info-circle me-2"></i>¿Cómo Funciona?
                             </h3>
                             <div class="row g-3">
-                                <div class="col-md-3 text-center">
+                                <div class="col-md-3 col-6 text-center">
                                     <div class="p-3">
                                         <div class="mb-2" style="font-size: 2.5rem; color: #5B7B5A;">1️⃣</div>
-                                        <h5 style="font-size: 1rem;">Publicas</h5>
-                                        <p class="small text-muted mb-0">Completas el formulario con fotos</p>
+                                        <h5 style="font-size: 0.95rem;">Publicas</h5>
+                                        <p class="small text-muted mb-0 d-none d-md-block">Completas el formulario con fotos</p>
                                     </div>
                                 </div>
-                                <div class="col-md-3 text-center">
+                                <div class="col-md-3 col-6 text-center">
                                     <div class="p-3">
                                         <div class="mb-2" style="font-size: 2.5rem;">📧</div>
-                                        <h5 style="font-size: 1rem;">Recibes Email</h5>
-                                        <p class="small text-muted mb-0">Confirmación de recepción inmediata</p>
+                                        <h5 style="font-size: 0.95rem;">Recibes Email</h5>
+                                        <p class="small text-muted mb-0 d-none d-md-block">Confirmación inmediata</p>
                                     </div>
                                 </div>
-                                <div class="col-md-3 text-center">
+                                <div class="col-md-3 col-6 text-center">
                                     <div class="p-3">
                                         <div class="mb-2" style="font-size: 2.5rem;">✅</div>
-                                        <h5 style="font-size: 1rem;">Aprobación</h5>
-                                        <p class="small text-muted mb-0">Revisamos en 24-48h y te avisamos</p>
+                                        <h5 style="font-size: 0.95rem;">Aprobación</h5>
+                                        <p class="small text-muted mb-0 d-none d-md-block">Revisamos en 24-48h</p>
                                     </div>
                                 </div>
-                                <div class="col-md-3 text-center">
+                                <div class="col-md-3 col-6 text-center">
                                     <div class="p-3">
                                         <div class="mb-2" style="font-size: 2.5rem;">🎉</div>
-                                        <h5 style="font-size: 1rem;">Ya Vendiste?</h5>
-                                        <p class="small text-muted mb-0">Click en botón del email para marcarlo</p>
+                                        <h5 style="font-size: 0.95rem;">Ya Vendiste?</h5>
+                                        <p class="small text-muted mb-0 d-none d-md-block">Click en el email</p>
                                     </div>
                                 </div>
                             </div>
                             <hr class="my-3">
                             <div class="text-center">
                                 <small class="text-muted">
-                                    <strong>📱 Compradores te contactan directo:</strong> Por WhatsApp cuando tu producto esté aprobado
+                                    <strong>📱 Compradores te contactan directo por WhatsApp</strong>
                                 </small>
                             </div>
                         </div>
@@ -178,21 +202,21 @@
                                     </select>
                                 </div>
 
-                                <h5 class="mt-4 mb-3">📸 Fotos</h5>
+                                <h5 class="mt-4 mb-3">📸 Fotos (Máx 5)</h5>
                                 <div class="mb-3">
+                                    <!-- Área de upload optimizada para móvil -->
                                     <div class="image-upload-area" id="uploadArea">
-                                        <input type="file" id="imageInput" accept="image/*" multiple style="display:none" required>
-                                        <div class="upload-icon"><i class="bi bi-cloud-upload"></i></div>
-                                        <h5>Arrastra fotos aquí</h5>
-                                        <p class="text-muted">o haz click</p>
-                                        <button type="button" class="btn btn-primary" onclick="document.getElementById('imageInput').click()">
-                                            Seleccionar Fotos
+                                        <input type="file" id="imageInput" accept="image/*" multiple style="display:none">
+                                        <div class="upload-icon"><i class="bi bi-images"></i></div>
+                                        <h5 class="mb-3">Toca para seleccionar fotos</h5>
+                                        <button type="button" class="btn btn-primary btn-lg btn-select-photos" onclick="document.getElementById('imageInput').click()">
+                                            <i class="bi bi-camera me-2"></i>Seleccionar Fotos
                                         </button>
-                                        <p class="text-muted mt-2 mb-0"><small>Máx 5 fotos | 5MB cada una</small></p>
+                                        <p class="text-muted mt-3 mb-0"><small>Máx 5 fotos | 5MB cada una</small></p>
                                     </div>
                                     <div class="image-previews" id="imagePreviews"></div>
                                     <div class="text-center" id="imageCounter" style="display:none">
-                                        <span class="image-counter"><i class="bi bi-images me-2"></i><span id="imageCount">0</span> foto(s)</span>
+                                        <span class="image-counter"><i class="bi bi-images me-2"></i><span id="imageCount">0</span> foto(s) seleccionada(s)</span>
                                     </div>
                                 </div>
 
@@ -214,7 +238,7 @@
 
                                 <div class="form-check mb-4">
                                     <input class="form-check-input" type="checkbox" id="terms" required>
-                                    <label class="form-check-label" for="terms">Acepto revisión previa</label>
+                                    <label class="form-check-label" for="terms">Acepto revisión previa y términos de uso</label>
                                 </div>
 
                                 <button type="submit" class="btn btn-primary w-100 btn-lg">
@@ -225,9 +249,9 @@
                     </div>
 
                     <div class="alert alert-success text-center d-none" id="success">
-                        <h3>✅ Enviado</h3>
-                        <p>Te notificaremos por email</p>
-                        <button class="btn btn-primary" onclick="location.reload()">Publicar Otro</button>
+                        <h3>✅ ¡Enviado Exitosamente!</h3>
+                        <p class="mb-3">Te notificaremos por email cuando tu producto sea aprobado</p>
+                        <button class="btn btn-primary" onclick="location.reload()">Publicar Otro Producto</button>
                     </div>
                 </div>
             </div>
@@ -236,12 +260,12 @@
 
     <div class="loading-overlay d-none" id="loading">
         <div class="loading-content">
-            <div class="spinner-border text-primary mb-3"></div>
-            <h5 id="loadingText">Subiendo...</h5>
-            <div class="progress mt-3">
-                <div class="progress-bar progress-bar-animated" id="progress" style="width:0"></div>
+            <div class="spinner-border text-primary mb-3" style="width: 3rem; height: 3rem;"></div>
+            <h5 id="loadingText">Subiendo imágenes...</h5>
+            <div class="progress mt-3" style="height: 25px;">
+                <div class="progress-bar progress-bar-striped progress-bar-animated" id="progress" style="width:0; font-size: 1rem;"></div>
             </div>
-            <p class="mt-2" id="status">Preparando...</p>
+            <p class="mt-2 mb-0" id="status">Preparando...</p>
         </div>
     </div>
 
@@ -292,25 +316,49 @@ document.getElementById('regionSelect').addEventListener('change', function() {
 });
 
 const area=document.getElementById('uploadArea'),input=document.getElementById('imageInput');
-area.onclick=()=>input.click();
-area.ondragover=e=>{e.preventDefault();area.classList.add('dragover')};
-area.ondragleave=()=>area.classList.remove('dragover');
-area.ondrop=e=>{e.preventDefault();area.classList.remove('dragover');handleFiles(e.dataTransfer.files)};
+
+// Click en área (funciona en móvil y desktop)
+area.onclick=(e)=>{
+    // Solo abrir selector si no se hizo click en el botón
+    if(!e.target.closest('.btn-select-photos')){
+        input.click();
+    }
+};
+
+// Drag & drop solo para desktop
+if(window.innerWidth > 768){
+    area.ondragover=e=>{e.preventDefault();area.classList.add('dragover')};
+    area.ondragleave=()=>area.classList.remove('dragover');
+    area.ondrop=e=>{e.preventDefault();area.classList.remove('dragover');handleFiles(e.dataTransfer.files)};
+}
+
+// Cambio en input file (funciona en todos los dispositivos)
 input.onchange=e=>handleFiles(e.target.files);
 
 function handleFiles(files){
     const arr=Array.from(files);
-    if(imgs.length+arr.length>MAX_IMG){alert('Máx '+MAX_IMG+' fotos');return}
+    if(imgs.length+arr.length>MAX_IMG){
+        alert('Máximo '+MAX_IMG+' fotos permitidas');
+        return;
+    }
+    
     arr.forEach(f=>{
-        if(!f.type.match('image')){alert(f.name+': formato inválido');return}
-        if(f.size>MAX_SIZE){alert(f.name+': máx 5MB');return}
+        if(!f.type.match('image.*')){
+            alert(f.name+': Solo se permiten imágenes');
+            return;
+        }
+        if(f.size>MAX_SIZE){
+            alert(f.name+': Tamaño máximo 5MB');
+            return;
+        }
+        
         imgs.push(f);
         const r=new FileReader();
         r.onload=e=>{
             const d=document.createElement('div');
             d.className='image-preview';
             d.dataset.name=f.name;
-            d.innerHTML=`<img src="${e.target.result}"><button type="button" class="image-preview-remove" onclick="rmImg('${f.name}')"><i class="bi bi-x"></i></button>`;
+            d.innerHTML=`<img src="${e.target.result}" alt="${f.name}"><button type="button" class="image-preview-remove" onclick="rmImg('${f.name}')"><i class="bi bi-x"></i></button>`;
             document.getElementById('imagePreviews').appendChild(d);
         };
         r.readAsDataURL(f);
@@ -326,8 +374,15 @@ function rmImg(name){
 
 function updateCounter(){
     const c=document.getElementById('imageCounter'),n=document.getElementById('imageCount');
-    if(imgs.length>0){c.style.display='block';n.textContent=imgs.length;input.removeAttribute('required')}
-    else{c.style.display='none';input.setAttribute('required','required')}
+    if(imgs.length>0){
+        c.style.display='block';
+        n.textContent=imgs.length;
+        input.removeAttribute('required');
+    }
+    else{
+        c.style.display='none';
+        input.setAttribute('required','required');
+    }
 }
 
 function toBase64(f){
@@ -341,14 +396,18 @@ function toBase64(f){
 
 document.getElementById('submitForm').onsubmit=async e=>{
     e.preventDefault();
-    if(imgs.length===0){alert('Sube al menos 1 foto');return}
+    if(imgs.length===0){
+        alert('Debes subir al menos 1 foto de tu producto');
+        return;
+    }
     
     document.getElementById('loading').classList.remove('d-none');
     
     try{
-        document.getElementById('status').textContent='Procesando...';
+        document.getElementById('status').textContent='Procesando imágenes...';
         const imgData=await Promise.all(imgs.map(async(f,i)=>{
             document.getElementById('progress').style.width=((i+1)/imgs.length*50)+'%';
+            document.getElementById('progress').textContent=Math.round((i+1)/imgs.length*50)+'%';
             const b64=await toBase64(f);
             return{name:f.name,data:b64,mimeType:f.type};
         }));
@@ -361,9 +420,10 @@ document.getElementById('submitForm').onsubmit=async e=>{
         data.disponibilidad='pendiente';
         data.destacado='FALSE';
         
-        document.getElementById('loadingText').textContent='Guardando...';
-        document.getElementById('status').textContent='Subiendo a Drive...';
+        document.getElementById('loadingText').textContent='Guardando en servidor...';
+        document.getElementById('status').textContent='Subiendo a Google Drive...';
         document.getElementById('progress').style.width='75%';
+        document.getElementById('progress').textContent='75%';
         
         await fetch(SCRIPT_URL,{
             method:'POST',
@@ -373,6 +433,7 @@ document.getElementById('submitForm').onsubmit=async e=>{
         });
         
         document.getElementById('progress').style.width='100%';
+        document.getElementById('progress').textContent='100%';
         await new Promise(r=>setTimeout(r,500));
         
         document.getElementById('loading').classList.add('d-none');
@@ -383,7 +444,7 @@ document.getElementById('submitForm').onsubmit=async e=>{
     }catch(err){
         console.error(err);
         document.getElementById('loading').classList.add('d-none');
-        alert('Error. Intenta de nuevo.');
+        alert('Error al enviar. Por favor intenta de nuevo.');
     }
 };
 
