@@ -132,19 +132,33 @@
                                         <label class="form-label">Precio (CLP) *</label>
                                         <input type="number" class="form-control" name="precio" min="0" required>
                                     </div>
-                                    <div class="col-md-6 mb-3">
-                                        <label class="form-label">Categoría *</label>
-                                        <select class="form-select" name="categoria" required>
-                                            <option value="">Selecciona...</option>
-                                            <option value="muebles">Muebles</option>
-                                            <option value="electronica">Electrónica</option>
-                                            <option value="decoracion">Decoración</option>
-                                            <option value="cocina">Cocina</option>
-                                            <option value="negocio">Negocio</option>
-                                            <option value="otros">Otros</option>
-                                        </select>
-                                    </div>
-                                </div>
+                                    <!-- PARA PUBLICAR.HTML (Formulario) -->
+<div class="mb-3">
+    <label class="form-label">Categoría *</label>
+    <select class="form-select" name="categoria" required>
+        <option value="">Selecciona...</option>
+        <option value="muebles">Muebles</option>
+        <option value="electronica">Electrónica</option>
+        <option value="decoracion">Decoración</option>
+        <option value="cocina">Cocina</option>
+        <option value="negocio">Negocio</option>
+        <option value="servicios">Servicios</option>
+        <option value="ropa">Ropa y Moda</option>
+        <option value="deportes">Deportes</option>
+        <option value="bebes">Bebés y Niños</option>
+        <option value="libros">Libros y Medios</option>
+        <option value="jardineria">Jardinería</option>
+        <option value="mascotas">Mascotas</option>
+        <option value="herramientas">Herramientas</option>
+        <option value="vehiculos">Vehículos</option>
+        <option value="computacion">Computación</option>
+        <option value="musica">Música</option>
+        <option value="coleccionables">Coleccionables</option>
+        <option value="oficina">Oficina</option>
+        <option value="eventos">Eventos</option>
+        <option value="otros">Otros</option>
+    </select>
+</div>                                </div>
                                 <div class="mb-3">
                                     <label class="form-label">Estado *</label>
                                     <select class="form-select" name="estado" required>

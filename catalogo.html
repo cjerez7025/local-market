@@ -18,206 +18,238 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="styles.css">
     
-    <style>
-        /* ============================================
-           SISTEMA DE TEMAS POR CATEGORÍA
-           ============================================ */
-        
-        body {
-            transition: background-color 0.5s ease;
-        }
-        
-        .page-header {
-            transition: all 0.5s ease;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        /* Animación de partículas de fondo */
-        .category-particles {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            z-index: 0;
-            pointer-events: none;
-        }
-        
-        .particle {
-            position: absolute;
-            font-size: 2rem;
-            opacity: 0.3;
-            will-change: transform;
-            pointer-events: none;
-        }
-        
-        /* Badge de categoría activa */
-        .category-badge {
-            display: inline-block;
-            padding: 0.5rem 1.5rem;
-            border-radius: 50px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 1rem;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            position: relative;
-            z-index: 2;
-        }
-        
-        /* Animación del título */
-        .page-title {
-            position: relative;
-            z-index: 2;
-        }
-        
-        /* Overlay con patrón */
-        .category-pattern {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            opacity: 0.05;
-            background-size: 50px 50px;
-            z-index: 0;
-        }
-        
-        .pattern-muebles {
-            background-image: repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(255,255,255,.1) 10px, rgba(255,255,255,.1) 20px);
-        }
-        
-        .pattern-electronica {
-            background-image: 
-                linear-gradient(45deg, rgba(255,255,255,.1) 25%, transparent 25%),
-                linear-gradient(-45deg, rgba(255,255,255,.1) 25%, transparent 25%);
-        }
-        
-        .pattern-cocina {
-            background-image: radial-gradient(circle, rgba(255,255,255,.1) 1px, transparent 1px);
-            background-size: 20px 20px;
-        }
-        
-        /* ============================================
-           TEMAS POR CATEGORÍA
-           ============================================ */
-        
-        /* MUEBLES - Marrón/Madera */
-        body.theme-muebles {
-            background: linear-gradient(135deg, #FFF8DC 0%, #F5E6D3 100%);
-        }
-        body.theme-muebles .page-header {
-            background: linear-gradient(135deg, #8B4513 0%, #A0522D 100%);
-        }
-        body.theme-muebles .category-badge {
-            background: linear-gradient(135deg, #D2691E 0%, #8B4513 100%);
-            color: white;
-        }
-        body.theme-muebles .result-count {
-            background: rgba(139, 69, 19, 0.1);
-            color: #8B4513;
-        }
-        body.theme-muebles .filters-card {
-            border-left: 4px solid #8B4513;
-        }
-        
-        /* ELECTRONICA - Azul/Tech */
-        body.theme-electronica {
-            background: linear-gradient(135deg, #E3F2FD 0%, #BBDEFB 100%);
-        }
-        body.theme-electronica .page-header {
-            background: linear-gradient(135deg, #2196F3 0%, #1976D2 100%);
-        }
-        body.theme-electronica .category-badge {
-            background: linear-gradient(135deg, #42A5F5 0%, #1E88E5 100%);
-            color: white;
-        }
-        body.theme-electronica .result-count {
-            background: rgba(33, 150, 243, 0.1);
-            color: #1976D2;
-        }
-        body.theme-electronica .filters-card {
-            border-left: 4px solid #2196F3;
-        }
-        
-        /* DECORACION - Rosa/Violeta */
-        body.theme-decoracion {
-            background: linear-gradient(135deg, #FCE4EC 0%, #F8BBD0 100%);
-        }
-        body.theme-decoracion .page-header {
-            background: linear-gradient(135deg, #E91E63 0%, #C2185B 100%);
-        }
-        body.theme-decoracion .category-badge {
-            background: linear-gradient(135deg, #EC407A 0%, #D81B60 100%);
-            color: white;
-        }
-        body.theme-decoracion .result-count {
-            background: rgba(233, 30, 99, 0.1);
-            color: #C2185B;
-        }
-        body.theme-decoracion .filters-card {
-            border-left: 4px solid #E91E63;
-        }
-        
-        /* COCINA - Naranja/Rojo */
-        body.theme-cocina {
-            background: linear-gradient(135deg, #FFF3E0 0%, #FFE0B2 100%);
-        }
-        body.theme-cocina .page-header {
-            background: linear-gradient(135deg, #FF5722 0%, #E64A19 100%);
-        }
-        body.theme-cocina .category-badge {
-            background: linear-gradient(135deg, #FF6F42 0%, #FF5722 100%);
-            color: white;
-        }
-        body.theme-cocina .result-count {
-            background: rgba(255, 87, 34, 0.1);
-            color: #E64A19;
-        }
-        body.theme-cocina .filters-card {
-            border-left: 4px solid #FF5722;
-        }
-        
-        /* NEGOCIO - Verde/$$ */
-        body.theme-negocio {
-            background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%);
-        }
-        body.theme-negocio .page-header {
-            background: linear-gradient(135deg, #4CAF50 0%, #388E3C 100%);
-        }
-        body.theme-negocio .category-badge {
-            background: linear-gradient(135deg, #66BB6A 0%, #43A047 100%);
-            color: white;
-        }
-        body.theme-negocio .result-count {
-            background: rgba(76, 175, 80, 0.1);
-            color: #388E3C;
-        }
-        body.theme-negocio .filters-card {
-            border-left: 4px solid #4CAF50;
-        }
-        
-        /* OTROS - Gris/Neutro */
-        body.theme-otros {
-            background: linear-gradient(135deg, #ECEFF1 0%, #CFD8DC 100%);
-        }
-        body.theme-otros .page-header {
-            background: linear-gradient(135deg, #607D8B 0%, #455A64 100%);
-        }
-        body.theme-otros .category-badge {
-            background: linear-gradient(135deg, #78909C 0%, #546E7A 100%);
-            color: white;
-        }
-        body.theme-otros .result-count {
-            background: rgba(96, 125, 139, 0.1);
-            color: #455A64;
-        }
-        body.theme-otros .filters-card {
-            border-left: 4px solid #607D8B;
-        }
-    </style>
+<style>
+/* ============================================
+   HEADER PROFESIONAL - SIN ANIMACIONES
+   ============================================ */
+
+body {
+    transition: background-color 0.3s ease;
+}
+
+.page-header {
+    padding: 2rem 0 1.5rem;
+    transition: all 0.3s ease;
+    background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-dark) 100%);
+}
+
+.page-title {
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    margin-bottom: 0.5rem;
+    color: white;
+    font-weight: 700;
+}
+
+.page-subtitle {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 0;
+}
+
+.breadcrumb {
+    background: transparent;
+    padding: 0;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.breadcrumb-item + .breadcrumb-item::before {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.breadcrumb a {
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.breadcrumb a:hover {
+    color: white !important;
+}
+
+.result-count {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.6rem 1.2rem;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 50px;
+    font-weight: 600;
+    color: var(--color-accent);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    font-size: 0.95rem;
+}
+
+/* ============================================
+   TEMAS POR CATEGORÍA - MINIMALISTA
+   ============================================ */
+
+/* MUEBLES */
+body.theme-muebles {
+    background: #FAF7F2;
+}
+body.theme-muebles .page-header {
+    background: linear-gradient(135deg, #8B4513 0%, #6B3410 100%);
+}
+
+/* ELECTRONICA */
+body.theme-electronica {
+    background: #F5FAFF;
+}
+body.theme-electronica .page-header {
+    background: linear-gradient(135deg, #2196F3 0%, #1976D2 100%);
+}
+
+/* DECORACION */
+body.theme-decoracion {
+    background: #FFF5F8;
+}
+body.theme-decoracion .page-header {
+    background: linear-gradient(135deg, #E91E63 0%, #C2185B 100%);
+}
+
+/* COCINA */
+body.theme-cocina {
+    background: #FFF8F3;
+}
+body.theme-cocina .page-header {
+    background: linear-gradient(135deg, #FF5722 0%, #E64A19 100%);
+}
+
+/* NEGOCIO */
+body.theme-negocio {
+    background: #F5FBF5;
+}
+body.theme-negocio .page-header {
+    background: linear-gradient(135deg, #4CAF50 0%, #388E3C 100%);
+}
+
+/* SERVICIOS */
+body.theme-servicios {
+    background: #FAF5FF;
+}
+body.theme-servicios .page-header {
+    background: linear-gradient(135deg, #9C27B0 0%, #7B1FA2 100%);
+}
+
+/* ROPA */
+body.theme-ropa {
+    background: #FFF5F9;
+}
+body.theme-ropa .page-header {
+    background: linear-gradient(135deg, #FF4081 0%, #F50057 100%);
+}
+
+/* DEPORTES */
+body.theme-deportes {
+    background: #F7FCF5;
+}
+body.theme-deportes .page-header {
+    background: linear-gradient(135deg, #8BC34A 0%, #689F38 100%);
+}
+
+/* BEBES */
+body.theme-bebes {
+    background: #FFF5F8;
+}
+body.theme-bebes .page-header {
+    background: linear-gradient(135deg, #F8BBD0 0%, #F48FB1 100%);
+}
+
+/* LIBROS */
+body.theme-libros {
+    background: #F9F7F5;
+}
+body.theme-libros .page-header {
+    background: linear-gradient(135deg, #795548 0%, #5D4037 100%);
+}
+
+/* JARDINERIA */
+body.theme-jardineria {
+    background: #F5FBF5;
+}
+body.theme-jardineria .page-header {
+    background: linear-gradient(135deg, #388E3C 0%, #2E7D32 100%);
+}
+
+/* MASCOTAS */
+body.theme-mascotas {
+    background: #FFF9F3;
+}
+body.theme-mascotas .page-header {
+    background: linear-gradient(135deg, #FF9800 0%, #F57C00 100%);
+}
+
+/* HERRAMIENTAS */
+body.theme-herramientas {
+    background: #F7F9FA;
+}
+body.theme-herramientas .page-header {
+    background: linear-gradient(135deg, #607D8B 0%, #455A64 100%);
+}
+
+/* VEHICULOS */
+body.theme-vehiculos {
+    background: #FFF5F5;
+}
+body.theme-vehiculos .page-header {
+    background: linear-gradient(135deg, #F44336 0%, #D32F2F 100%);
+}
+
+/* COMPUTACION */
+body.theme-computacion {
+    background: #F5F8FF;
+}
+body.theme-computacion .page-header {
+    background: linear-gradient(135deg, #1565C0 0%, #0D47A1 100%);
+}
+
+/* MUSICA */
+body.theme-musica {
+    background: #F8F5FF;
+}
+body.theme-musica .page-header {
+    background: linear-gradient(135deg, #673AB7 0%, #512DA8 100%);
+}
+
+/* COLECCIONABLES */
+body.theme-coleccionables {
+    background: #FFFEF5;
+}
+body.theme-coleccionables .page-header {
+    background: linear-gradient(135deg, #FFC107 0%, #FFA000 100%);
+}
+
+/* OFICINA */
+body.theme-oficina {
+    background: #F7F9FA;
+}
+body.theme-oficina .page-header {
+    background: linear-gradient(135deg, #546E7A 0%, #37474F 100%);
+}
+
+/* EVENTOS */
+body.theme-eventos {
+    background: #FFFEF5;
+}
+body.theme-eventos .page-header {
+    background: linear-gradient(135deg, #FFEB3B 0%, #FDD835 100%);
+}
+body.theme-eventos .page-title,
+body.theme-eventos .page-subtitle,
+body.theme-eventos .breadcrumb-item.active {
+    color: #333 !important;
+}
+body.theme-eventos .breadcrumb a {
+    color: rgba(0, 0, 0, 0.6) !important;
+}
+
+/* OTROS */
+body.theme-otros {
+    background: #F7F7F7;
+}
+body.theme-otros .page-header {
+    background: linear-gradient(135deg, #9E9E9E 0%, #757575 100%);
+}
+</style>
 </head>
 <body>
     <!-- Navigation -->
@@ -242,18 +274,31 @@
         </div>
     </nav>
 
-    <!-- Page Header -->
-    <section class="page-header">
-        <div class="container text-center">
-            <h1 class="page-title" data-aos="fade-up">Catálogo Completo</h1>
-            <p class="page-subtitle" data-aos="fade-up" data-aos-delay="100">
-                Encuentra exactamente lo que necesitas
-            </p>
-            <div class="result-count mt-3" data-aos="fade-up" data-aos-delay="200">
-                <span id="resultCount">Cargando productos...</span>
+<!-- Page Header - PROFESIONAL -->
+<section class="page-header">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-8">
+                <nav aria-label="breadcrumb" class="mb-2">
+                    <ol class="breadcrumb mb-0">
+                        <li class="breadcrumb-item"><a href="index.html" style="color: rgba(255,255,255,0.8);">Inicio</a></li>
+                        <li class="breadcrumb-item active" style="color: white;">Catálogo</li>
+                    </ol>
+                </nav>
+                <h1 class="page-title" id="categoryTitle">Catálogo Completo</h1>
+                <p class="page-subtitle" id="categorySubtitle">
+                    Encuentra exactamente lo que necesitas
+                </p>
+            </div>
+            <div class="col-md-4 text-md-end mt-3 mt-md-0">
+                <div class="result-count">
+                    <i class="bi bi-box me-2"></i>
+                    <span id="resultCount">Cargando productos...</span>
+                </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
     <!-- Filters and Products -->
     <section class="catalog-section py-5">
@@ -282,15 +327,30 @@
                             <label class="filter-label">
                                 <i class="bi bi-grid"></i> Categoría
                             </label>
-                            <select id="categoryFilter" class="form-select">
-                                <option value="">Todas las categorías</option>
-                                <option value="muebles">Muebles</option>
-                                <option value="electronica">Electrónica</option>
-                                <option value="decoracion">Decoración</option>
-                                <option value="cocina">Cocina</option>
-                                <option value="negocio">Negocio</option>
-                                <option value="otros">Otros</option>
-                            </select>
+                            <!-- PARA CATALOGO.HTML (Filtro) -->
+<select id="categoryFilter" class="form-select">
+    <option value="">Todas las categorías</option>
+    <option value="muebles">Muebles</option>
+    <option value="electronica">Electrónica</option>
+    <option value="decoracion">Decoración</option>
+    <option value="cocina">Cocina</option>
+    <option value="negocio">Negocio</option>
+    <option value="servicios">Servicios</option>
+    <option value="ropa">Ropa y Moda</option>
+    <option value="deportes">Deportes</option>
+    <option value="bebes">Bebés y Niños</option>
+    <option value="libros">Libros y Medios</option>
+    <option value="jardineria">Jardinería</option>
+    <option value="mascotas">Mascotas</option>
+    <option value="herramientas">Herramientas</option>
+    <option value="vehiculos">Vehículos</option>
+    <option value="computacion">Computación</option>
+    <option value="musica">Música</option>
+    <option value="coleccionables">Coleccionables</option>
+    <option value="oficina">Oficina</option>
+    <option value="eventos">Eventos</option>
+    <option value="otros">Otros</option>
+</select>
                         </div>
 
                         <!-- Filtro de Región -->
@@ -539,213 +599,60 @@
     <!-- Custom JS -->
     <script src="app-dinamico.js"></script>
     
-    <script>
-        // ============================================
-        // SISTEMA DE TEMAS POR CATEGORÍA CON GSAP
-        // ============================================
+  <script>
+// ============================================
+// TEMAS PROFESIONALES - SIN PARTÍCULAS
+// ============================================
+
+const categoryInfo = {
+    muebles: { name: 'Muebles', subtitle: 'Sofás, mesas, sillas y más' },
+    electronica: { name: 'Electrónica', subtitle: 'Tecnología y gadgets' },
+    decoracion: { name: 'Decoración', subtitle: 'Adornos y arte para tu hogar' },
+    cocina: { name: 'Cocina', subtitle: 'Utensilios y electrodomésticos' },
+    negocio: { name: 'Negocio', subtitle: 'Liquidaciones y equipamiento' },
+    servicios: { name: 'Servicios', subtitle: 'Servicios profesionales' },
+    ropa: { name: 'Ropa y Moda', subtitle: 'Vestuario y accesorios' },
+    deportes: { name: 'Deportes', subtitle: 'Equipamiento deportivo' },
+    bebes: { name: 'Bebés y Niños', subtitle: 'Artículos infantiles' },
+    libros: { name: 'Libros y Medios', subtitle: 'Lectura y entretenimiento' },
+    jardineria: { name: 'Jardinería', subtitle: 'Plantas y herramientas' },
+    mascotas: { name: 'Mascotas', subtitle: 'Todo para tu mascota' },
+    herramientas: { name: 'Herramientas', subtitle: 'Equipos y herramientas' },
+    vehiculos: { name: 'Vehículos', subtitle: 'Autos, motos, repuestos' },
+    computacion: { name: 'Computación', subtitle: 'Equipos informáticos' },
+    musica: { name: 'Música', subtitle: 'Instrumentos y audio' },
+    coleccionables: { name: 'Coleccionables', subtitle: 'Arte y antigüedades' },
+    oficina: { name: 'Oficina', subtitle: 'Mobiliario y papelería' },
+    eventos: { name: 'Eventos', subtitle: 'Artículos para fiestas' },
+    otros: { name: 'Otros', subtitle: 'Productos varios' }
+};
+
+// Aplicar tema - MINIMALISTA
+function applyCategoryTheme() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const categoria = urlParams.get('categoria');
+    
+    if (categoria && categoryInfo[categoria]) {
+        const info = categoryInfo[categoria];
+        document.body.className = `theme-${categoria}`;
         
-        const categoryThemes = {
-            muebles: {
-                name: 'Muebles',
-                icon: '🪑',
-                particles: ['🪑', '🛋️', '🪞', '🚪', '🛏️'],
-                title: 'Muebles de Calidad'
-            },
-            electronica: {
-                name: 'Electrónica',
-                icon: '💻',
-                particles: ['💻', '📱', '⌚', '🎮', '📷'],
-                title: 'Tecnología y Electrónica'
-            },
-            decoracion: {
-                name: 'Decoración',
-                icon: '🎨',
-                particles: ['🎨', '🖼️', '🕯️', '🌺', '✨'],
-                title: 'Decoración para tu Hogar'
-            },
-            cocina: {
-                name: 'Cocina',
-                icon: '🍳',
-                particles: ['🍳', '🔪', '🍽️', '☕', '🥘'],
-                title: 'Artículos de Cocina'
-            },
-            negocio: {
-                name: 'Negocio',
-                icon: '🏪',
-                particles: ['🏪', '💼', '📊', '💰', '🛒'],
-                title: 'Equipamiento de Negocio'
-            },
-            otros: {
-                name: 'Otros',
-                icon: '📦',
-                particles: ['📦', '🎁', '🔧', '⚡', '🌟'],
-                title: 'Productos Varios'
-            }
-        };
-
-        // Aplicar tema de categoría con animaciones GSAP
-        function applyCategoryTheme() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const categoria = urlParams.get('categoria');
-            
-            if (categoria && categoryThemes[categoria]) {
-                const theme = categoryThemes[categoria];
-                const body = document.body;
-                const pageHeader = document.querySelector('.page-header');
-                const pageTitle = document.querySelector('.page-title');
-                
-                // Aplicar clase de tema al body
-                body.className = `theme-${categoria}`;
-                
-                // Crear badge de categoría
-                const badge = document.createElement('div');
-                badge.className = 'category-badge';
-                badge.innerHTML = `${theme.icon} ${theme.name}`;
-                
-                // Actualizar título
-                pageTitle.textContent = theme.title;
-                pageTitle.style.position = 'relative';
-                pageTitle.style.zIndex = '2';
-                
-                // Insertar badge antes del título
-                pageTitle.parentNode.insertBefore(badge, pageTitle);
-                
-                // Crear partículas animadas con GSAP
-                createParticles(pageHeader, theme.particles);
-                
-                // Crear patrón de fondo
-                const pattern = document.createElement('div');
-                pattern.className = `category-pattern pattern-${categoria}`;
-                pageHeader.insertBefore(pattern, pageHeader.firstChild);
-                
-                // Animar título y badge con GSAP
-                animateCategoryTitle();
-            }
-        }
-
-        // Crear partículas animadas con GSAP
-        function createParticles(container, emojis) {
-            const particlesContainer = document.createElement('div');
-            particlesContainer.className = 'category-particles';
-            
-            for (let i = 0; i < 25; i++) {
-                const particle = document.createElement('div');
-                particle.className = 'particle';
-                particle.textContent = emojis[Math.floor(Math.random() * emojis.length)];
-                
-                // Posición inicial aleatoria
-                const startX = Math.random() * 100;
-                const startY = Math.random() * 100;
-                
-                gsap.set(particle, {
-                    left: startX + '%',
-                    top: startY + '%',
-                    opacity: 0.2,
-                    scale: 0.7 + Math.random() * 0.5
-                });
-                
-                particlesContainer.appendChild(particle);
-                
-                // Animación con GSAP - Movimiento flotante suave
-                gsap.to(particle, {
-                    y: '-=' + (40 + Math.random() * 60),
-                    x: (Math.random() - 0.5) * 120,
-                    rotation: (Math.random() - 0.5) * 720,
-                    opacity: 0.5,
-                    scale: 0.9 + Math.random() * 0.4,
-                    duration: 4 + Math.random() * 6,
-                    repeat: -1,
-                    yoyo: true,
-                    ease: "sine.inOut",
-                    delay: Math.random() * 3
-                });
-                
-                // Animación de pulso adicional
-                gsap.to(particle, {
-                    scale: '+=' + (Math.random() * 0.2),
-                    duration: 1.5 + Math.random() * 2,
-                    repeat: -1,
-                    yoyo: true,
-                    ease: "power1.inOut",
-                    delay: Math.random() * 2
-                });
-            }
-            
-            container.insertBefore(particlesContainer, container.firstChild);
-        }
-
-        // Animar título de categoría con GSAP
-        function animateCategoryTitle() {
-            const pageTitle = document.querySelector('.page-title');
-            const badge = document.querySelector('.category-badge');
-            
-            if (pageTitle) {
-                gsap.from(pageTitle, {
-                    duration: 1,
-                    y: 50,
-                    opacity: 0,
-                    scale: 0.85,
-                    ease: "back.out(1.7)",
-                    delay: 0.3
-                });
-            }
-            
-            if (badge) {
-                gsap.from(badge, {
-                    duration: 0.8,
-                    y: -40,
-                    opacity: 0,
-                    scale: 0.7,
-                    rotation: -10,
-                    ease: "elastic.out(1, 0.6)",
-                    delay: 0.1
-                });
-                
-                // Efecto de pulso sutil continuo
-                gsap.to(badge, {
-                    scale: 1.05,
-                    duration: 2,
-                    repeat: -1,
-                    yoyo: true,
-                    ease: "sine.inOut"
-                });
-            }
-        }
-
-        // Efecto parallax en scroll con GSAP
-        let lastScrollY = 0;
-        window.addEventListener('scroll', () => {
-            const particles = document.querySelectorAll('.particle');
-            const scrolled = window.pageYOffset;
-            const delta = scrolled - lastScrollY;
-            
-            particles.forEach((particle, index) => {
-                const speed = 0.15 + (index % 5) * 0.05;
-                const rotation = delta * 0.2;
-                
-                gsap.to(particle, {
-                    y: '+=' + (delta * speed),
-                    rotation: '+=' + rotation,
-                    duration: 0.5,
-                    ease: "power2.out"
-                });
-            });
-            
-            lastScrollY = scrolled;
-        });
-
-        // Initialize AOS
-        AOS.init({
-            once: true,
-            duration: 800,
-            easing: 'ease-out-cubic'
-        });
-
-        // Aplicar tema antes de inicializar catálogo
-        applyCategoryTheme();
+        const pageTitle = document.getElementById('categoryTitle');
+        const pageSubtitle = document.getElementById('categorySubtitle');
         
-        // Initialize catalog
-        initCatalog();
-    </script>
+        if (pageTitle) pageTitle.textContent = info.name;
+        if (pageSubtitle) pageSubtitle.textContent = info.subtitle;
+    }
+}
+
+// Initialize
+AOS.init({
+    once: true,
+    duration: 600,
+    easing: 'ease-out-cubic'
+});
+
+applyCategoryTheme();
+initCatalog();
+</script>
 </body>
 </html>

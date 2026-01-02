@@ -1,20 +1,22 @@
 /* ============================================
-   LIQUIDACIÓN TOTAL - CUSTOM STYLES
-   Diseño minimalista refinado con toques premium
+   LOCAL MARKET - PALETA CORAL & TURQUESA
+   Versión: Actualización segura de colores
    ============================================ */
 
 /* ============================================
-   CSS VARIABLES - PALETA DE COLORES
+   CSS VARIABLES - PALETA CORAL & TURQUESA
    ============================================ */
 :root {
-    /* Colores principales */
-    --color-background: #FAF7F2;
+    /* Colores principales - Coral & Turquesa */
+    --color-background: #FFF8F3;
     --color-white: #FFFFFF;
     --color-text: #1A1A1A;
     --color-text-light: #6B6B6B;
-    --color-accent: #5B7B5A;
-    --color-accent-dark: #3E5A3D;
-    --color-accent-light: #E8F0E8;
+    --color-accent: #FF6B6B;
+    --color-accent-dark: #EE5A52;
+    --color-accent-light: #FFE5E5;
+    --color-secondary: #4ECDC4;
+    --color-tertiary: #FFE66D;
     
     /* Colores de estado */
     --color-success: #4CAF50;
@@ -22,11 +24,11 @@
     --color-danger: #F44336;
     --color-info: #2196F3;
     
-    /* Sombras */
-    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.06);
-    --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.08);
-    --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.12);
-    --shadow-hover: 0 12px 40px rgba(0, 0, 0, 0.15);
+    /* Sombras coloridas */
+    --shadow-sm: 0 2px 8px rgba(255, 107, 107, 0.1);
+    --shadow-md: 0 4px 16px rgba(255, 107, 107, 0.15);
+    --shadow-lg: 0 8px 32px rgba(255, 107, 107, 0.2);
+    --shadow-hover: 0 12px 40px rgba(255, 107, 107, 0.3);
     
     /* Transiciones */
     --transition-fast: 200ms ease;
@@ -126,7 +128,7 @@ img {
     min-height: 85vh;
     display: flex;
     align-items: center;
-    background: linear-gradient(135deg, var(--color-background) 0%, #F0EBE3 100%);
+    background: linear-gradient(135deg, #FFF8F3 0%, #E5F9F8 50%, #FFF4E6 100%);
     overflow: hidden;
 }
 
@@ -136,7 +138,7 @@ img {
     left: 0;
     right: 0;
     bottom: 0;
-    background: radial-gradient(circle at 30% 50%, rgba(91, 123, 90, 0.05) 0%, transparent 70%);
+    background: radial-gradient(circle at 30% 50%, rgba(255, 107, 107, 0.08) 0%, transparent 70%);
     pointer-events: none;
 }
 
@@ -237,13 +239,13 @@ img {
 }
 
 .btn-primary {
-    background-color: var(--color-accent);
+    background: linear-gradient(135deg, #FF6B6B 0%, #FF8787 100%);
     color: var(--color-white);
     box-shadow: var(--shadow-sm);
 }
 
 .btn-primary:hover {
-    background-color: var(--color-accent-dark);
+    background: linear-gradient(135deg, #EE5A52 0%, #FF6B6B 100%);
     transform: translateY(-2px);
     box-shadow: var(--shadow-md);
     color: var(--color-white);
@@ -340,7 +342,7 @@ img {
     left: 0;
     right: 0;
     height: 4px;
-    background: linear-gradient(90deg, var(--color-accent), var(--color-accent-dark));
+    background: linear-gradient(90deg, #FF6B6B, #4ECDC4);
     transform: scaleX(0);
     transition: var(--transition-base);
 }
@@ -369,7 +371,7 @@ img {
 }
 
 .category-card:hover .category-icon {
-    background: var(--color-accent);
+    background: linear-gradient(135deg, #FF6B6B 0%, #4ECDC4 100%);
     color: var(--color-white);
     transform: scale(1.1);
 }
@@ -431,7 +433,7 @@ img {
 .product-image-wrapper {
     position: relative;
     width: 100%;
-    padding-top: 75%; /* 4:3 Aspect Ratio */
+    padding-top: 75%;
     overflow: hidden;
     background: var(--color-background);
 }
@@ -483,7 +485,7 @@ img {
 }
 
 .product-card:hover .photo-count-badge {
-    background: rgba(91, 123, 90, 0.95);
+    background: rgba(255, 107, 107, 0.95);
     transform: scale(1.05);
 }
 
@@ -684,7 +686,7 @@ img {
     width: 60px;
     height: 60px;
     margin: 0 auto 1.5rem;
-    background: linear-gradient(135deg, var(--color-accent), var(--color-accent-dark));
+    background: linear-gradient(135deg, #FF6B6B, #4ECDC4);
     color: white;
     border-radius: 50%;
     display: flex;
@@ -713,7 +715,7 @@ img {
 }
 
 .cta-card {
-    background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-dark) 100%);
+    background: linear-gradient(135deg, #FF6B6B 0%, #EE5A52 100%);
     padding: 3rem 2.5rem;
     border-radius: 20px;
     color: white;
@@ -764,7 +766,7 @@ img {
 }
 
 .accordion-button:not(.collapsed)::after {
-    filter: brightness(0) saturate(100%) invert(34%) sepia(20%) saturate(1000%) hue-rotate(74deg);
+    filter: brightness(0) saturate(100%) invert(50%) sepia(60%) saturate(3000%) hue-rotate(335deg);
 }
 
 .accordion-body {
@@ -896,50 +898,11 @@ img {
 }
 
 /* ============================================
-   WHATSAPP FLOATING BUTTON (DISABLED)
-   ============================================ */
-/* Botón flotante eliminado - ahora cada producto tiene su WhatsApp
-.whatsapp-float {
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    width: 60px;
-    height: 60px;
-    background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
-    color: white;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 2rem;
-    box-shadow: var(--shadow-lg);
-    z-index: 1000;
-    transition: var(--transition-base);
-    animation: pulse 2s infinite;
-}
-
-.whatsapp-float:hover {
-    transform: scale(1.1);
-    box-shadow: var(--shadow-hover);
-    color: white;
-}
-
-@keyframes pulse {
-    0%, 100% {
-        box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7);
-    }
-    50% {
-        box-shadow: 0 0 0 15px rgba(37, 211, 102, 0);
-    }
-}
-*/
-
-/* ============================================
    PAGE HEADER (Catalog)
    ============================================ */
 .page-header {
     padding: 3rem 0 2rem;
-    background: linear-gradient(135deg, var(--color-background) 0%, #F0EBE3 100%);
+    background: linear-gradient(135deg, #FFF8F3 0%, #E5F9F8 100%);
 }
 
 .page-title {
@@ -1003,7 +966,7 @@ img {
 .form-control:focus,
 .form-select:focus {
     border-color: var(--color-accent);
-    box-shadow: 0 0 0 0.2rem rgba(91, 123, 90, 0.15);
+    box-shadow: 0 0 0 0.2rem rgba(255, 107, 107, 0.15);
 }
 
 .form-check-input:checked {
@@ -1013,7 +976,7 @@ img {
 
 .form-check-input:focus {
     border-color: var(--color-accent);
-    box-shadow: 0 0 0 0.2rem rgba(91, 123, 90, 0.15);
+    box-shadow: 0 0 0 0.2rem rgba(255, 107, 107, 0.15);
 }
 
 /* ============================================
@@ -1150,6 +1113,59 @@ img {
 }
 
 /* ============================================
+   Modal: miniaturas para múltiples imágenes
+   ============================================ */
+.modal-thumbs{
+    display:flex;
+    gap:10px;
+    overflow-x:auto;
+    padding:8px 2px 2px;
+    scroll-snap-type:x mandatory;
+}
+
+.modal-thumbs::-webkit-scrollbar{
+    height:6px;
+}
+
+.modal-thumbs::-webkit-scrollbar-thumb{
+    background: rgba(255, 107, 107, 0.3);
+    border-radius: 999px;
+}
+
+.modal-thumbs .thumb-btn{
+    flex:0 0 auto;
+    width:72px;
+    height:54px;
+    border-radius:12px;
+    border:1px solid rgba(0,0,0,0.12);
+    background:#fff;
+    padding:0;
+    overflow:hidden;
+    cursor:pointer;
+    scroll-snap-align:start;
+    transition: var(--transition-base);
+}
+
+.modal-thumbs .thumb-btn:hover{
+    transform: translateY(-1px);
+    border-color: rgba(0,0,0,0.22);
+}
+
+.modal-thumbs .thumb-btn.active{
+    border-color: var(--color-accent);
+    box-shadow: 0 0 0 2px rgba(255, 107, 107, 0.2);
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+}
+
+.modal-thumbs .thumb-img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+}
+
+/* ============================================
    UTILITY CLASSES
    ============================================ */
 .bg-light-subtle {
@@ -1194,14 +1210,6 @@ img {
     .cta-card {
         padding: 2rem 1.5rem;
         text-align: center;
-    }
-    
-    .whatsapp-float {
-        width: 55px;
-        height: 55px;
-        bottom: 20px;
-        right: 20px;
-        font-size: 1.8rem;
     }
 }
 
@@ -1268,7 +1276,6 @@ html {
     border: 0;
 }
 
-/* Focus styles for keyboard navigation */
 a:focus,
 button:focus,
 input:focus,
@@ -1276,56 +1283,273 @@ select:focus {
     outline: 2px solid var(--color-accent);
     outline-offset: 2px;
 }
-
 /* ============================================
-   Modal: miniaturas para múltiples imágenes
+   TEMAS POR CATEGORÍA - CATÁLOGO
+   Agregar al final de catalogo.html en el <style>
    ============================================ */
-.modal-thumbs{
-    display:flex;
-    gap:10px;
-    overflow-x:auto;
-    padding:8px 2px 2px;
-    scroll-snap-type:x mandatory;
+
+/* SERVICIOS - Morado */
+body.theme-servicios {
+    background: linear-gradient(135deg, #F3E5F5 0%, #E1BEE7 100%);
+}
+body.theme-servicios .page-header {
+    background: linear-gradient(135deg, #9C27B0 0%, #7B1FA2 100%);
+}
+body.theme-servicios .category-badge {
+    background: linear-gradient(135deg, #AB47BC 0%, #8E24AA 100%);
+    color: white;
+}
+body.theme-servicios .result-count {
+    background: rgba(156, 39, 176, 0.1);
+    color: #7B1FA2;
+}
+body.theme-servicios .filters-sidebar {
+    border-left: 4px solid #9C27B0;
 }
 
-.modal-thumbs::-webkit-scrollbar{
-    height:6px;
+/* ROPA - Fucsia */
+body.theme-ropa {
+    background: linear-gradient(135deg, #FCE4EC 0%, #F8BBD0 100%);
+}
+body.theme-ropa .page-header {
+    background: linear-gradient(135deg, #FF4081 0%, #F50057 100%);
+}
+body.theme-ropa .category-badge {
+    background: linear-gradient(135deg, #FF80AB 0%, #FF4081 100%);
+    color: white;
+}
+body.theme-ropa .result-count {
+    background: rgba(255, 64, 129, 0.1);
+    color: #F50057;
+}
+body.theme-ropa .filters-sidebar {
+    border-left: 4px solid #FF4081;
 }
 
-.modal-thumbs::-webkit-scrollbar-thumb{
-    background: rgba(0,0,0,0.18);
-    border-radius: 999px;
+/* DEPORTES - Verde Lima */
+body.theme-deportes {
+    background: linear-gradient(135deg, #F1F8E9 0%, #DCEDC8 100%);
+}
+body.theme-deportes .page-header {
+    background: linear-gradient(135deg, #8BC34A 0%, #689F38 100%);
+}
+body.theme-deportes .category-badge {
+    background: linear-gradient(135deg, #9CCC65 0%, #7CB342 100%);
+    color: white;
+}
+body.theme-deportes .result-count {
+    background: rgba(139, 195, 74, 0.1);
+    color: #689F38;
+}
+body.theme-deportes .filters-sidebar {
+    border-left: 4px solid #8BC34A;
 }
 
-.modal-thumbs .thumb-btn{
-    flex:0 0 auto;
-    width:72px;
-    height:54px;
-    border-radius:12px;
-    border:1px solid rgba(0,0,0,0.12);
-    background:#fff;
-    padding:0;
-    overflow:hidden;
-    cursor:pointer;
-    scroll-snap-align:start;
-    transition: var(--transition-base);
+/* BEBÉS - Rosa Bebé */
+body.theme-bebes {
+    background: linear-gradient(135deg, #FCE4EC 0%, #F8BBD0 100%);
+}
+body.theme-bebes .page-header {
+    background: linear-gradient(135deg, #F8BBD0 0%, #F06292 100%);
+}
+body.theme-bebes .category-badge {
+    background: linear-gradient(135deg, #F8BBD0 0%, #F48FB1 100%);
+    color: #880E4F;
+}
+body.theme-bebes .result-count {
+    background: rgba(248, 187, 208, 0.3);
+    color: #C2185B;
+}
+body.theme-bebes .filters-sidebar {
+    border-left: 4px solid #F8BBD0;
 }
 
-.modal-thumbs .thumb-btn:hover{
-    transform: translateY(-1px);
-    border-color: rgba(0,0,0,0.22);
+/* LIBROS - Café */
+body.theme-libros {
+    background: linear-gradient(135deg, #EFEBE9 0%, #D7CCC8 100%);
+}
+body.theme-libros .page-header {
+    background: linear-gradient(135deg, #795548 0%, #5D4037 100%);
+}
+body.theme-libros .category-badge {
+    background: linear-gradient(135deg, #8D6E63 0%, #6D4C41 100%);
+    color: white;
+}
+body.theme-libros .result-count {
+    background: rgba(121, 85, 72, 0.1);
+    color: #5D4037;
+}
+body.theme-libros .filters-sidebar {
+    border-left: 4px solid #795548;
 }
 
-.modal-thumbs .thumb-btn.active{
-    border-color: var(--color-accent);
-    box-shadow: 0 0 0 2px rgba(0,0,0,0.0), 0 0 0 3px rgba(255,255,255,0.0);
-    outline: 2px solid var(--color-accent);
-    outline-offset: 2px;
+/* JARDINERÍA - Verde Oscuro */
+body.theme-jardineria {
+    background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%);
+}
+body.theme-jardineria .page-header {
+    background: linear-gradient(135deg, #388E3C 0%, #2E7D32 100%);
+}
+body.theme-jardineria .category-badge {
+    background: linear-gradient(135deg, #66BB6A 0%, #43A047 100%);
+    color: white;
+}
+body.theme-jardineria .result-count {
+    background: rgba(56, 142, 60, 0.1);
+    color: #2E7D32;
+}
+body.theme-jardineria .filters-sidebar {
+    border-left: 4px solid #388E3C;
 }
 
-.modal-thumbs .thumb-img{
-    width:100%;
-    height:100%;
-    object-fit:cover;
-    display:block;
+/* MASCOTAS - Naranja Suave */
+body.theme-mascotas {
+    background: linear-gradient(135deg, #FFF3E0 0%, #FFE0B2 100%);
+}
+body.theme-mascotas .page-header {
+    background: linear-gradient(135deg, #FF9800 0%, #F57C00 100%);
+}
+body.theme-mascotas .category-badge {
+    background: linear-gradient(135deg, #FFB74D 0%, #FFA726 100%);
+    color: white;
+}
+body.theme-mascotas .result-count {
+    background: rgba(255, 152, 0, 0.1);
+    color: #F57C00;
+}
+body.theme-mascotas .filters-sidebar {
+    border-left: 4px solid #FF9800;
+}
+
+/* HERRAMIENTAS - Gris Oscuro */
+body.theme-herramientas {
+    background: linear-gradient(135deg, #ECEFF1 0%, #CFD8DC 100%);
+}
+body.theme-herramientas .page-header {
+    background: linear-gradient(135deg, #607D8B 0%, #455A64 100%);
+}
+body.theme-herramientas .category-badge {
+    background: linear-gradient(135deg, #78909C 0%, #546E7A 100%);
+    color: white;
+}
+body.theme-herramientas .result-count {
+    background: rgba(96, 125, 139, 0.1);
+    color: #455A64;
+}
+body.theme-herramientas .filters-sidebar {
+    border-left: 4px solid #607D8B;
+}
+
+/* VEHÍCULOS - Rojo */
+body.theme-vehiculos {
+    background: linear-gradient(135deg, #FFEBEE 0%, #FFCDD2 100%);
+}
+body.theme-vehiculos .page-header {
+    background: linear-gradient(135deg, #F44336 0%, #D32F2F 100%);
+}
+body.theme-vehiculos .category-badge {
+    background: linear-gradient(135deg, #EF5350 0%, #E53935 100%);
+    color: white;
+}
+body.theme-vehiculos .result-count {
+    background: rgba(244, 67, 54, 0.1);
+    color: #D32F2F;
+}
+body.theme-vehiculos .filters-sidebar {
+    border-left: 4px solid #F44336;
+}
+
+/* COMPUTACIÓN - Azul Oscuro */
+body.theme-computacion {
+    background: linear-gradient(135deg, #E3F2FD 0%, #BBDEFB 100%);
+}
+body.theme-computacion .page-header {
+    background: linear-gradient(135deg, #1565C0 0%, #0D47A1 100%);
+}
+body.theme-computacion .category-badge {
+    background: linear-gradient(135deg, #1976D2 0%, #1565C0 100%);
+    color: white;
+}
+body.theme-computacion .result-count {
+    background: rgba(21, 101, 192, 0.1);
+    color: #0D47A1;
+}
+body.theme-computacion .filters-sidebar {
+    border-left: 4px solid #1565C0;
+}
+
+/* MÚSICA - Púrpura */
+body.theme-musica {
+    background: linear-gradient(135deg, #EDE7F6 0%, #D1C4E9 100%);
+}
+body.theme-musica .page-header {
+    background: linear-gradient(135deg, #673AB7 0%, #512DA8 100%);
+}
+body.theme-musica .category-badge {
+    background: linear-gradient(135deg, #7E57C2 0%, #5E35B1 100%);
+    color: white;
+}
+body.theme-musica .result-count {
+    background: rgba(103, 58, 183, 0.1);
+    color: #512DA8;
+}
+body.theme-musica .filters-sidebar {
+    border-left: 4px solid #673AB7;
+}
+
+/* COLECCIONABLES - Dorado */
+body.theme-coleccionables {
+    background: linear-gradient(135deg, #FFFDE7 0%, #FFF9C4 100%);
+}
+body.theme-coleccionables .page-header {
+    background: linear-gradient(135deg, #FFC107 0%, #FFA000 100%);
+}
+body.theme-coleccionables .category-badge {
+    background: linear-gradient(135deg, #FFD54F 0%, #FFCA28 100%);
+    color: #F57F17;
+}
+body.theme-coleccionables .result-count {
+    background: rgba(255, 193, 7, 0.2);
+    color: #FF8F00;
+}
+body.theme-coleccionables .filters-sidebar {
+    border-left: 4px solid #FFC107;
+}
+
+/* OFICINA - Azul Gris */
+body.theme-oficina {
+    background: linear-gradient(135deg, #ECEFF1 0%, #CFD8DC 100%);
+}
+body.theme-oficina .page-header {
+    background: linear-gradient(135deg, #546E7A 0%, #37474F 100%);
+}
+body.theme-oficina .category-badge {
+    background: linear-gradient(135deg, #607D8B 0%, #455A64 100%);
+    color: white;
+}
+body.theme-oficina .result-count {
+    background: rgba(84, 110, 122, 0.1);
+    color: #37474F;
+}
+body.theme-oficina .filters-sidebar {
+    border-left: 4px solid #546E7A;
+}
+
+/* EVENTOS - Amarillo */
+body.theme-eventos {
+    background: linear-gradient(135deg, #FFFDE7 0%, #FFF9C4 100%);
+}
+body.theme-eventos .page-header {
+    background: linear-gradient(135deg, #FFEB3B 0%, #FDD835 100%);
+}
+body.theme-eventos .category-badge {
+    background: linear-gradient(135deg, #FFEE58 0%, #FDD835 100%);
+    color: #F57F17;
+}
+body.theme-eventos .result-count {
+    background: rgba(255, 235, 59, 0.3);
+    color: #F57F17;
+}
+body.theme-eventos .filters-sidebar {
+    border-left: 4px solid #FFEB3B;
 }
