@@ -250,10 +250,25 @@
                                     </div>
                                 </div>
 
-                                <div class="form-check mb-4">
-                                    <input class="form-check-input" type="checkbox" id="terms" required>
-                                    <label class="form-check-label" for="terms">Acepto revisión previa y términos de uso</label>
-                                </div>
+<h5 class="mt-4 mb-3">📧 Notificaciones</h5>
+                <div class="alert alert-info">
+                    <i class="bi bi-info-circle me-2"></i>
+                    <strong>Mantente informado:</strong> Recibe un email cada vez que se publique un nuevo producto
+                </div>
+                
+                <div class="form-check mb-4">
+                    <input class="form-check-input" type="checkbox" id="suscribirNewsletter" name="suscribir" checked>
+                    <label class="form-check-label" for="suscribirNewsletter">
+                        <strong>Sí, quiero recibir notificaciones de nuevos productos</strong>
+                        <br>
+                        <small class="text-muted">Recibirás solo 1 email por producto (sin duplicados)</small>
+                    </label>
+                </div>
+
+                <div class="form-check mb-4">
+                    <input class="form-check-input" type="checkbox" id="terms" required>
+                    <label class="form-check-label" for="terms">Acepto revisión previa y términos de uso</label>
+                </div>
 
                                 <button type="submit" class="btn btn-primary w-100 btn-lg">
                                     <i class="bi bi-send me-2"></i>Enviar para Revisión
@@ -285,7 +300,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-const SCRIPT_URL='https://script.google.com/macros/s/AKfycbximqLlIYLdXtWKHv5ugP4HIZaTf0V6jgzEsEVroEZe99lnx-XfJqwCWfsWhjBvYYGJ/exec';
+const SCRIPT_URL='https://script.google.com/macros/s/AKfycbzCNeSQ99i0x2nYKuH0et20h9e-w9j0vciZghpcQWL0wizsm6RoA1LM00IS9g2HutAuwg/exec';
 
 const MAX_IMG=5,MAX_SIZE=5*1024*1024;
 let imgs=[];
@@ -434,7 +449,9 @@ document.getElementById('submitForm').onsubmit=async e=>{
         data.fechaPublicacion=new Date().toISOString().split('T')[0];
         data.disponibilidad='pendiente';
         data.destacado='FALSE';
-        
+        // Capturar suscripción
+        const suscribirCheckbox = document.getElementById('suscribirNewsletter');
+        data.suscrito = suscribirCheckbox && suscribirCheckbox.checked ? 'TRUE' : 'FALSE';
         document.getElementById('loadingText').textContent='Guardando en servidor...';
         document.getElementById('status').textContent='Subiendo a Google Drive...';
         document.getElementById('progress').style.width='75%';
